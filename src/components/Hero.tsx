@@ -37,8 +37,11 @@ export const Hero = () => {
           <Button 
             size="lg"
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-6 text-lg"
+            asChild
           >
-            Fale com um especialista
+            <a href="http://wa.me/5513991187759" target="_blank" rel="noopener noreferrer">
+              Fale com um especialista
+            </a>
           </Button>
         </div>
       </div>
