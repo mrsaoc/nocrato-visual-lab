@@ -3,7 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import bricioImg from "@/assets/bricio.png";
 import pedroImg from "@/assets/pedro.png";
 import sophiaImg from "@/assets/sophia.png";
-import saraImg from "@/assets/sara.png";
 
 export const Team = () => {
   const team = [
@@ -28,48 +27,42 @@ export const Team = () => {
       image: sophiaImg,
       badge: "DESIGNER",
     },
-    {
-      name: "SARA SANTOS",
-      role: "TRÁFEGO PAGO",
-      description: "Gerente de Tráfego, Especialista em Web Design. Amante de Performance. Mais de 8 anos implementando estratégias para Amazônia.",
-      image: saraImg,
-      badge: "TRÁFEGO PAGO",
-    },
   ];
 
   return (
-    <section className="py-20 bg-background">
-      <div className="container">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-8">
-            Conheça nossa equipe
-          </h1>
-        </div>
+      <section className="py-20 bg-background">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-8">
+              Conheça nossa equipe
+            </h1>
+          </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {team.map((member, index) => (
-            <Card key={index} className="bg-card border-border text-center">
-              <CardContent className="p-6">
-                <div className="mb-4">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-32 h-32 rounded-full mx-auto object-cover mb-4 border-4 border-primary/20"
-                  />
-                  <Badge className="bg-primary text-primary-foreground mb-2 hover:bg-primary/90">
-                    {member.badge}
-                  </Badge>
-                </div>
-                <h4 className="font-bold text-lg text-foreground mb-1">{member.name}</h4>
-                <p className="text-primary font-semibold mb-3 text-sm">{member.role}</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {member.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
+          {/* Flexbox centralizado para garantir alinhamento correto com 3 itens */}
+          <div className="flex flex-wrap justify-center gap-8">
+            {team.map((member, index) => (
+                <Card key={index} className="bg-card border-border text-center w-full md:max-w-[280px]">
+                  <CardContent className="p-6">
+                    <div className="mb-4">
+                      <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-32 h-32 rounded-full mx-auto object-cover mb-4 border-4 border-primary/20"
+                      />
+                      <Badge className="bg-primary text-primary-foreground mb-2 hover:bg-primary/90">
+                        {member.badge}
+                      </Badge>
+                    </div>
+                    <h4 className="font-bold text-lg text-foreground mb-1">{member.name}</h4>
+                    <p className="text-primary font-semibold mb-3 text-sm">{member.role}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {member.description}
+                    </p>
+                  </CardContent>
+                </Card>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
   );
 };
