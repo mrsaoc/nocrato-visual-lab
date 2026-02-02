@@ -7,17 +7,17 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 
 const Index = () => {
-  return (
-    <div className="min-h-screen dark">
-      <Header />
-      <Hero />
-      <Method />
-      <Testimonials />
-      <Team />
-      <Contact />
-      <Footer />
-    </div>
-  );
+    return (
+        <div className="min-h-screen bg-[#111111]">
+            <Header />
+            <Hero />
+            <Method />
+            <Testimonials />
+            <Team />
+            <Contact />
+            <Footer />
+        </div>
+    );
 };
 
 export default Index;

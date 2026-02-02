@@ -22,11 +22,11 @@ export default {
 				border: "hsl(var(--border))",
 				input: "hsl(var(--input))",
 				ring: "hsl(var(--ring))",
-				background: "#111111", // Soft Black solicitado
-				foreground: "#FFFFFF", // Branco puro para texto
+				background: "#111111",
+				foreground: "#FFFFFF",
 				primary: {
 					DEFAULT: "#FABE01", // Amarelo
-					foreground: "#111111", // Texto preto no botão amarelo
+					foreground: "#111111",
 				},
 				secondary: {
 					DEFAULT: "#DE7928", // Laranja
@@ -37,11 +37,11 @@ export default {
 					foreground: "hsl(var(--destructive-foreground))",
 				},
 				muted: {
-					DEFAULT: "#1A1A1A", // Um pouco mais claro que o fundo
-					foreground: "#7387A0", // Azul acinzentado da paleta
+					DEFAULT: "#1A1A1A",
+					foreground: "#7387A0",
 				},
 				accent: {
-					DEFAULT: "#6E5305", // Dourado escuro
+					DEFAULT: "#6E5305",
 					foreground: "#FFFFFF",
 				},
 				popover: {
@@ -49,7 +49,7 @@ export default {
 					foreground: "#FFFFFF",
 				},
 				card: {
-					DEFAULT: "#161616", // Ligeiramente diferente do fundo para dar profundidade
+					DEFAULT: "#161616",
 					foreground: "#FFFFFF",
 				},
 			},
@@ -76,6 +76,9 @@ export default {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
 				float: "float 6s ease-in-out infinite",
+				"float-slow": "float 8s ease-in-out infinite",
+				"float-medium": "float 6s ease-in-out infinite",
+				"float-fast": "float 5s ease-in-out infinite",
 			},
 		},
 	},

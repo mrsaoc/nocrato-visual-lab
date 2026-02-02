@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import drMarcioImg from "@/assets/drmarcio.png";
 import draFabianaImg from "@/assets/drafabiana.png";
+import textureImg from "@/assets/image-removebg-preview.png";
 
 export const Testimonials = () => {
   const testimonials = [
@@ -22,37 +23,52 @@ export const Testimonials = () => {
   ];
 
   return (
-      <section className="py-20 bg-primary">
-        <div className="container">
-          <div className="mb-12">
-            <h2 className="text-sm font-semibold text-primary-foreground/70 mb-2 tracking-wider">
+      <section className="relative py-16 md:py-24 bg-[#FABE01] overflow-hidden">
+        {/* Textura Responsiva */}
+        <div
+            className="absolute inset-0 z-0 pointer-events-none opacity-[0.10] invert"
+            style={{
+              backgroundImage: `url(${textureImg})`,
+              backgroundRepeat: 'repeat',
+              backgroundSize: '120px' // Menor para mobile
+            }}
+        />
+
+        <div className="container relative z-10 px-4">
+          <div className="mb-10 md:mb-12 text-center md:text-left">
+            <h2 className="text-xs md:text-sm font-bold text-[#111111]/70 mb-2 tracking-wider uppercase">
               Veja Alguns
             </h2>
-            <h3 className="text-4xl md:text-5xl font-bold text-primary-foreground">DEPOIMENTOS</h3>
+            <h3 className="text-3xl md:text-5xl font-black text-[#111111]">
+              DEPOIMENTOS
+            </h3>
           </div>
 
-          {/* Alterado de Grid para Flex com Justify Center para centralizar os cards */}
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-col md:flex-row flex-wrap justify-center gap-6 md:gap-8">
             {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-background/95 border-none overflow-hidden shadow-lg w-full md:max-w-[350px]">
-                  <div className="h-40 bg-muted overflow-hidden">
+                <Card key={index} className="bg-[#111111] border-none shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] w-full md:w-[350px] group transition-transform hover:-translate-y-2 duration-300">
+                  <div className="h-40 md:h-48 overflow-hidden relative">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111] to-transparent z-10 opacity-60" />
                     <img
                         src={testimonial.image}
                         alt={testimonial.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                     />
                   </div>
-                  <CardContent className="p-6">
+                  <CardContent className="p-6 md:p-8 relative z-20 -mt-10">
                     <div className="mb-4">
-                      {testimonial.subtitle && (
-                          <p className="text-sm text-foreground italic mb-2">{testimonial.subtitle}</p>
-                      )}
-                      <Badge className="bg-primary text-primary-foreground mb-2">
+                      <Badge className="bg-white text-black font-bold hover:bg-white/90 mb-3">
                         {testimonial.role}
                       </Badge>
+                      {testimonial.subtitle && (
+                          <p className="text-xs text-[#FABE01] italic font-serif mb-1">{testimonial.subtitle}</p>
+                      )}
                     </div>
-                    <p className="text-sm text-foreground leading-relaxed">
+                    <p className="text-sm text-zinc-300 leading-relaxed italic border-l-2 border-[#FABE01] pl-4">
                       "{testimonial.text}"
+                    </p>
+                    <p className="text-[#FABE01] font-bold mt-4 text-right text-xs tracking-widest uppercase opacity-80">
+                      {testimonial.name}
                     </p>
                   </CardContent>
                 </Card>
