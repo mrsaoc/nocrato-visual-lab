@@ -1,9 +1,19 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import textureImg from "@/assets/image-removebg-preview.png";
 
 export const Contact = () => {
   return (
-      <section id="contact" className="relative py-16 md:py-24 bg-[#FABE01]">
+      <section id="contact" className="relative py-16 md:py-24 bg-[#FABE01] overflow-hidden">
+        {/* --- Textura de Fundo (Branca Invertida) --- */}
         <div
             className="absolute inset-0 z-0 pointer-events-none opacity-[0.08] invert"
             style={{
@@ -13,26 +23,100 @@ export const Contact = () => {
             }}
         />
 
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] md:w-[800px] h-[300px] md:h-[500px] bg-white opacity-[0.1] blur-[100px] rounded-full pointer-events-none" />
+        <div className="container relative z-10 px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
 
-        <div className="container relative z-10 text-center px-4">
-          <h2 className="text-3xl md:text-5xl font-black text-[#111111] mb-6 leading-tight">
-            Tire suas dúvidas,
-          </h2>
+            {/* LADO ESQUERDO: Chamada de Texto */}
+            <div className="text-center md:text-left">
+              <h2 className="text-4xl md:text-6xl font-black text-[#111111] mb-6 leading-tight">
+                Sua clínica <br/>
+                precisa <span className="text-white drop-shadow-md">aparecer.</span>
+              </h2>
 
-          <p className="text-lg md:text-xl text-[#111111]/80 font-medium mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed">
-            Responda esse formulário e nossa equipe entrará em contato
-          </p>
+              <p className="text-lg md:text-xl text-[#111111]/80 font-medium mb-8 leading-relaxed">
+                Preencha os dados ao lado e descubra como nossa estratégia especializada em saúde pode lotar sua agenda.
+              </p>
 
-          <Button
-              size="lg"
-              className="w-full md:w-auto bg-[#111111] hover:bg-[#111111]/80 text-white font-bold px-8 md:px-12 py-6 md:py-8 text-lg md:text-xl rounded-sm shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] transition-all hover:scale-105"
-              asChild
-          >
-            <a href="http://wa.me/5513991187759" target="_blank" rel="noopener noreferrer">
-              Clique e faça agora mesmo.
-            </a>
-          </Button>
+              {/* Lista de Vantagens (Visual clean) */}
+              <div className="hidden md:flex flex-col gap-4 text-[#111111]/90 font-semibold">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-black rounded-full" />
+                  <span>Estratégias éticas (respeitando o CFM)</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-black rounded-full" />
+                  <span>Foco em pacientes particulares</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-black rounded-full" />
+                  <span>Autoridade digital para o médico</span>
+                </div>
+              </div>
+            </div>
+
+            {/* LADO DIREITO: O Formulário (Card Preto) */}
+            <div className="bg-[#111111] p-8 md:p-10 rounded-sm shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] relative group">
+              {/* Detalhe Dourado no Topo do Card */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FABE01] to-[#DE7928]" />
+
+              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+
+                {/* Nome */}
+                <div className="space-y-2 text-left">
+                  <Label htmlFor="name" className="text-zinc-400 text-xs uppercase tracking-widest">Nome Completo</Label>
+                  <Input
+                      id="name"
+                      placeholder="Dr(a). Seu Nome"
+                      className="bg-[#1A1A1A] border-[#333] text-white focus:border-[#FABE01] h-12 rounded-sm placeholder:text-zinc-600 transition-all"
+                  />
+                </div>
+
+                {/* Telefone */}
+                <div className="space-y-2 text-left">
+                  <Label htmlFor="phone" className="text-zinc-400 text-xs uppercase tracking-widest">Whatsapp</Label>
+                  <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="(00) 00000-0000"
+                      className="bg-[#1A1A1A] border-[#333] text-white focus:border-[#FABE01] h-12 rounded-sm placeholder:text-zinc-600 transition-all"
+                  />
+                </div>
+
+                {/* Email */}
+                <div className="space-y-2 text-left">
+                  <Label htmlFor="email" className="text-zinc-400 text-xs uppercase tracking-widest">Email Corporativo</Label>
+                  <Input
+                      id="email"
+                      type="email"
+                      placeholder="contato@suaclinica.com"
+                      className="bg-[#1A1A1A] border-[#333] text-white focus:border-[#FABE01] h-12 rounded-sm placeholder:text-zinc-600 transition-all"
+                  />
+                </div>
+
+                {/* Especialidade Médica (Select ou Input) */}
+                <div className="space-y-2 text-left">
+                  <Label htmlFor="specialty" className="text-zinc-400 text-xs uppercase tracking-widest">Especialidade Médica</Label>
+                  <Input
+                      id="specialty"
+                      placeholder="Ex: Dermatologia, Cardiologia..."
+                      className="bg-[#1A1A1A] border-[#333] text-white focus:border-[#FABE01] h-12 rounded-sm placeholder:text-zinc-600 transition-all"
+                  />
+                </div>
+
+                <Button
+                    size="lg"
+                    className="w-full bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold h-14 text-lg rounded-sm mt-4 transition-transform hover:scale-[1.02]"
+                >
+                  QUERO ALAVANCAR MINHA CLÍNICA
+                </Button>
+
+                <p className="text-zinc-500 text-xs text-center mt-4">
+                  Seus dados estão seguros conosco.
+                </p>
+              </form>
+            </div>
+
+          </div>
         </div>
       </section>
   );
