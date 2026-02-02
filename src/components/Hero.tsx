@@ -6,15 +6,14 @@ export const Hero = () => {
             {/* Fundo Base */}
             <div className="absolute inset-0 z-0 bg-[#111111]" />
 
-            {/* Gradientes Atmosféricos (Menores no mobile) */}
+            {/* Gradientes Atmosféricos */}
             <div className="absolute top-[-10%] right-[-10%] w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-primary/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none" />
             <div className="absolute bottom-[-10%] left-[-10%] w-[200px] md:w-[600px] h-[200px] md:h-[600px] bg-secondary/10 rounded-full blur-[60px] md:blur-[100px] pointer-events-none" />
 
             {/* Textura de Ruído */}
             <div className="absolute inset-0 z-0 opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay pointer-events-none"></div>
 
-            {/* --- GOLDEN WAVES (Adaptação Mobile) --- */}
-            {/* Mobile: Fundo total, opacidade baixa. Desktop: Direita, opacidade normal. */}
+            {/* --- GOLDEN WAVES --- */}
             <div className="absolute inset-0 md:right-0 md:left-auto md:w-[60%] z-0 pointer-events-none overflow-hidden opacity-30 md:opacity-80">
                 <svg className="w-full h-full" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                     <path
@@ -53,7 +52,12 @@ export const Hero = () => {
                 </svg>
             </div>
 
-            <div className="container relative z-10 py-12 md:py-20 px-4">
+            {/* AQUI ESTÁ A CORREÇÃO DE MARGEM:
+                pt-32 (padding-top 128px) no Mobile
+                pt-48 (padding-top 192px) no Desktop
+                Isso garante que o texto nunca suba demais e cole no Header.
+            */}
+            <div className="container relative z-10 pt-32 pb-16 md:pt-48 md:pb-24 px-4">
                 <div className="max-w-2xl mx-auto md:mx-0 text-center md:text-left">
                     <div className="inline-block px-3 py-1 mb-6 border border-[#FABE01]/20 rounded-full bg-[#FABE01]/5 backdrop-blur-sm">
                         <span className="text-[#FABE01] text-[10px] md:text-xs font-bold uppercase tracking-widest">
