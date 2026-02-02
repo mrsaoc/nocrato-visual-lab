@@ -24,7 +24,7 @@ export const Contact = () => {
         />
 
         <div className="container relative z-10 px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
 
             {/* LADO ESQUERDO: Chamada de Texto */}
             <div className="text-center md:text-left">
@@ -55,7 +55,7 @@ export const Contact = () => {
             </div>
 
             {/* LADO DIREITO: O Formulário (Card Preto) */}
-            <div className="bg-[#111111] p-8 md:p-10 rounded-sm shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] relative group">
+            <div className="bg-[#111111] p-6 md:p-10 rounded-sm shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] relative group">
               {/* Detalhe Dourado no Topo do Card */}
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FABE01] to-[#DE7928]" />
 
@@ -105,7 +105,7 @@ export const Contact = () => {
 
                 <Button
                     size="lg"
-                    className="w-full bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold h-14 text-lg rounded-sm mt-4 transition-transform hover:scale-[1.02]"
+                    className="w-full bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold h-auto min-h-[3.5rem] py-4 md:py-0 md:h-14 text-base md:text-lg rounded-sm mt-4 transition-transform active:scale-95 md:hover:scale-[1.02] whitespace-normal leading-tight"
                 >
                   QUERO ALAVANCAR MINHA CLÍNICA
                 </Button>
