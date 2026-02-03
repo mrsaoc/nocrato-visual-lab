@@ -71,6 +71,11 @@ export default {
 					"0%, 100%": { transform: "translateY(0)" },
 					"50%": { transform: "translateY(-20px)" },
 				},
+				// NOVA ANIMAÇÃO DE MARQUEE
+				marquee: {
+					from: { transform: "translateX(0)" },
+					to: { transform: "translateX(-50%)" },
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
@@ -79,6 +84,8 @@ export default {
 				"float-slow": "float 8s ease-in-out infinite",
 				"float-medium": "float 6s ease-in-out infinite",
 				"float-fast": "float 5s ease-in-out infinite",
+				// APLICAÇÃO DA ANIMAÇÃO
+				marquee: "marquee 30s linear infinite",
 			},
 		},
 	},

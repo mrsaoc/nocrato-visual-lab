@@ -52,7 +52,7 @@ export const Method = () => {
                     </h2>
 
                     <p className="text-sm md:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                        A Nocrato Marketing transforma sua presença digital em resultados reais. Com o método DAILY,
+                        A Nocrato Marketing transforma sua presença digital em resultados reais. Com o método PAEV,
                         criamos estratégias inovadoras para aumentar o engajamento da sua empresa e impulsionar suas
                         vendas online.
                     </p>
