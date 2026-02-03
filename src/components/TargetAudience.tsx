@@ -4,7 +4,7 @@ import textureImg from "@/assets/image-removebg-preview.png";
 export const TargetAudience = () => {
     const segments = [
         {
-            title: "Cirurgiões Plásticos",
+            title: "Fisioterapeutas e Ortopedistas",
             description: "Aumente o volume de cirurgias particulares e torne-se a referência número 1 da sua cidade.",
             image: "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=2070&auto=format&fit=crop", // Imagem de Centro Cirúrgico Premium
         },
@@ -19,7 +19,7 @@ export const TargetAudience = () => {
             image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2070&auto=format&fit=crop", // Imagem de Fitness/Saúde
         },
         {
-            title: "Clínicas de Estética",
+            title: "Clínicas e Consultórios",
             description: "Estratégias de tráfego local para lotar sua agenda de avaliações todos os dias.",
             image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop", // Imagem de Clínica Moderna
         }
