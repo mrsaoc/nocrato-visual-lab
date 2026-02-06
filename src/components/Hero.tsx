@@ -9,7 +9,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { TrendingUp, Users, ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
-// --- IMPORTANDO SUAS IMAGENS LOCAIS ---
+// --- IMPORTANDO SUAS IMAGENS LOCAIS (Mantidas conforme seu código) ---
 import bricio1 from "@/assets/bricioepedro.png";
 import bricio2 from "@/assets/bricio2.jpeg";
 import pedro1 from "@/assets/pedro1.jpeg";
@@ -26,10 +26,6 @@ export const Hero = () => {
     const slides = [
         {
             image: bricio1,
-            // AJUSTE FINO DE ENQUADRAMENTO:
-            // object-[center_35%] posiciona o foco da imagem a 35% do topo.
-            // Isso geralmente coloca o rosto logo abaixo do header de forma natural.
-            // Se ainda cortar um pouco, tente 40%. Se ficar muito baixo, tente 30%.
             align: "object-[center_35%]",
             tag: "Marketing de Raiz Forte",
             title: (
@@ -44,7 +40,7 @@ export const Hero = () => {
         },
         {
             image: pedro1,
-            align: "object-[center_35%]", // Ajuste fino para o Pedro
+            align: "object-[center_35%]",
             tag: "Alta Performance",
             title: (
                 <>
@@ -58,7 +54,7 @@ export const Hero = () => {
         },
         {
             image: bricio2,
-            align: "object-[center_35%]", // Ajuste fino para a segunda foto do Bricio
+            align: "object-[center_35%]",
             tag: "Autoridade Médica",
             title: (
                 <>
@@ -72,7 +68,7 @@ export const Hero = () => {
         },
         {
             image: pedro2,
-            align: "object-[center_35%]", // Ajuste fino para a segunda foto do Pedro
+            align: "object-[center_35%]",
             tag: "Tecnologia Exclusiva",
             title: (
                 <>
@@ -100,13 +96,11 @@ export const Hero = () => {
     }, [api]);
 
     return (
-        // Voltei para h-[100dvh] e tela cheia normal
         <section className="relative h-[100dvh] flex items-center overflow-hidden bg-[#111111] group/hero">
 
             {/* --- CONTROLES MANUAIS --- */}
             <button
                 onClick={() => api?.scrollPrev()}
-                // Voltei o top para 1/2 (centro da tela)
                 className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/20 text-white/30 backdrop-blur-md transition-all
         hover:bg-black/50 hover:text-[#FABE01] hover:border-[#FABE01]/50
         opacity-30 md:opacity-0 md:group-hover/hero:opacity-100 duration-500 cursor-pointer pointer-events-auto"
@@ -126,7 +120,6 @@ export const Hero = () => {
             </button>
 
             {/* --- CAMADA 1: CARROSSEL --- */}
-            {/* Voltei para tela cheia: absolute inset-0 h-full */}
             <div className="absolute inset-0 z-0 cursor-grab active:cursor-grabbing">
                 <Carousel
                     setApi={setApi}
@@ -141,14 +134,10 @@ export const Hero = () => {
                                     <img
                                         src={slide.image}
                                         alt={`Slide ${index + 1}`}
-                                        // O align aqui (ex: object-[center_35%]) vai garantir o enquadramento correto sem zoom excessivo
                                         className={`absolute inset-0 w-full h-full object-cover ${slide.align}`}
                                     />
 
-                                    {/* GRADIENTE SPOTLIGHT
-                      Ajustei para ser um pouco mais transparente no meio (via-[#111111]/50)
-                      para a pessoa aparecer mais.
-                  */}
+                                    {/* Gradiente Spotlight */}
                                     <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/50 to-transparent z-10" />
                                 </div>
                             </CarouselItem>
@@ -157,56 +146,69 @@ export const Hero = () => {
                 </Carousel>
             </div>
 
-            {/* --- CAMADA 3: ELEMENTOS FLUTUANTES --- */}
-            {/* Voltei o posicionamento original */}
+            {/* --- CAMADA 3: ELEMENTOS FLUTUANTES (AJUSTADO: MENORES E MAIS SUTIS) --- */}
             <div className="absolute inset-y-0 right-0 w-1/2 z-10 pointer-events-none hidden md:block max-w-[700px]">
-                {/* Card ROI */}
-                <div className="absolute top-[25%] right-[10%] bg-black/40 backdrop-blur-md border border-[#FABE01]/30 p-4 rounded-xl flex items-center gap-4 animate-float-slow shadow-[0_0_30px_rgba(250,190,1,0.1)]">
-                    <div className="bg-[#FABE01]/20 p-3 rounded-lg">
-                        <TrendingUp className="w-8 h-8 text-[#FABE01]" />
+                {/* Card ROI - Reduzi tamanho, opacidade do fundo e bordas */}
+                <div className="absolute top-[25%] right-[5%] bg-black/20 backdrop-blur-sm border border-[#FABE01]/20 p-3 rounded-lg flex items-center gap-3 animate-float-slow shadow-none">
+                    <div className="bg-[#FABE01]/10 p-2 rounded-md">
+                        <TrendingUp className="w-5 h-5 text-[#FABE01]" />
                     </div>
                     <div>
-                        <p className="text-white font-bold text-xl leading-none">+10x</p>
-                        <p className="text-zinc-400 text-xs uppercase tracking-wider font-semibold">Retorno em Vendas</p>
+                        <p className="text-white font-bold text-lg leading-none">+10x</p>
+                        <p className="text-zinc-400 text-[10px] uppercase tracking-wider font-semibold">Retorno em Vendas</p>
                     </div>
                 </div>
 
-                {/* Card Prova Social */}
-                <div className="absolute bottom-[20%] right-[15%] bg-black/40 backdrop-blur-md border border-white/10 p-4 rounded-xl flex items-center gap-4 animate-float-medium shadow-2xl">
-                    <div className="bg-white/10 p-3 rounded-full">
-                        <Users className="w-6 h-6 text-white" />
+                {/* Card Prova Social - Reduzi tamanho e opacidade */}
+                <div className="absolute bottom-[20%] right-[10%] bg-black/20 backdrop-blur-sm border border-white/5 p-3 rounded-lg flex items-center gap-3 animate-float-medium">
+                    <div className="bg-white/5 p-2 rounded-full">
+                        <Users className="w-4 h-4 text-white" />
                     </div>
                     <div>
-                        <div className="flex -space-x-3 mb-1">
+                        <div className="flex -space-x-2 mb-1">
                             {avatarImages.map((avatarUrl, i) => (
                                 <img
                                     key={i}
                                     src={avatarUrl}
-                                    alt={`Paciente ${i+1}`}
-                                    className="w-8 h-8 rounded-full border-2 border-[#111111] object-cover"
+                                    alt={`Paciente ${i + 1}`}
+                                    className="w-6 h-6 rounded-full border border-[#111111] object-cover"
                                 />
                             ))}
-                            <div className="w-8 h-8 rounded-full bg-[#FABE01] border-2 border-[#111111] flex items-center justify-center text-[9px] font-black text-[#111111] z-10">
+                            <div className="w-6 h-6 rounded-full bg-[#FABE01] border border-[#111111] flex items-center justify-center text-[8px] font-black text-[#111111] z-10">
                                 +1k
                             </div>
                         </div>
-                        <p className="text-zinc-300 text-xs font-medium pl-1">Pacientes Impactados</p>
+                        <p className="text-zinc-300 text-[10px] font-medium pl-1">Pacientes Impactados</p>
                     </div>
                 </div>
 
-                {/* Card Selo */}
-                <div className="absolute bottom-[10%] right-[45%] bg-gradient-to-br from-[#FABE01] to-[#DE7928] p-[1px] rounded-full animate-float-fast opacity-90">
-                    <div className="bg-black/90 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2">
-                        <ShieldCheck className="w-4 h-4 text-[#FABE01]" />
-                        <span className="text-white text-xs font-bold uppercase tracking-widest">Método Validado</span>
+                {/* Card Selo - Menor e mais transparente */}
+                <div className="absolute bottom-[10%] right-[40%] bg-gradient-to-br from-[#FABE01]/50 to-[#DE7928]/50 p-[1px] rounded-full animate-float-fast opacity-80">
+                    <div className="bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-2">
+                        <ShieldCheck className="w-3 h-3 text-[#FABE01]" />
+                        <span className="text-white text-[10px] font-bold uppercase tracking-widest">Método Validado</span>
                     </div>
                 </div>
             </div>
 
-            {/* --- EFEITOS DE FUNDO --- */}
-            <div className="absolute top-[-10%] right-[-10%] w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-primary/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0" />
-            <div className="absolute bottom-[-10%] left-[-10%] w-[200px] md:w-[600px] h-[200px] md:h-[600px] bg-secondary/10 rounded-full blur-[60px] md:blur-[100px] pointer-events-none z-0" />
-            <div className="absolute inset-0 z-0 opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay pointer-events-none"></div>
+            {/* --- EFEITOS DE FUNDO (COM ONDAS ANIMADAS) --- */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                {/* Ondas Animadas - mix-blend-screen para misturar suavemente */}
+                <div className="absolute inset-0 md:right-0 md:left-auto md:w-[60%] overflow-hidden opacity-40 mix-blend-screen">
+                    <svg className="w-full h-full" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                        <path d="M800 800V200C700 350 600 250 500 400C400 550 300 450 200 600C100 750 0 650 0 800H800Z" fill="url(#gradient1)" fillOpacity="0.2" className="animate-float-slow" />
+                        <path d="M800 800V300C720 400 620 350 520 500C420 650 320 550 220 700C120 850 0 750 0 800H800Z" fill="url(#gradient2)" fillOpacity="0.2" className="animate-float-medium" style={{ animationDirection: "reverse" }} />
+                        <defs>
+                            <linearGradient id="gradient1" x1="400" y1="200" x2="400" y2="800" gradientUnits="userSpaceOnUse"><stop stopColor="#DE7928" /><stop offset="1" stopColor="#DE7928" stopOpacity="0" /></linearGradient>
+                            <linearGradient id="gradient2" x1="400" y1="300" x2="400" y2="800" gradientUnits="userSpaceOnUse"><stop stopColor="#FABE01" /><stop offset="1" stopColor="#FABE01" stopOpacity="0" /></linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+
+                <div className="absolute top-[-10%] right-[-10%] w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-primary/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0" />
+                <div className="absolute bottom-[-10%] left-[-10%] w-[200px] md:w-[600px] h-[200px] md:h-[600px] bg-secondary/10 rounded-full blur-[60px] md:blur-[100px] pointer-events-none z-0" />
+                <div className="absolute inset-0 z-0 opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay pointer-events-none"></div>
+            </div>
 
             {/* --- CAMADA 4: CONTEÚDO PRINCIPAL --- */}
             <div className="container relative z-20 h-full flex flex-col justify-center px-4 md:pl-28 md:pr-12 pt-24 md:pt-32 pointer-events-none">
