@@ -36,25 +36,47 @@ export const Footer = () => {
               </div>
             </div>
 
-            {/* Coluna 2: Links Rápidos */}
+            {/* Coluna 2: Navegação (IDs CORRIGIDOS) */}
             <div>
               <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#FABE01]" />
                 Navegação
               </h3>
               <ul className="space-y-4">
-                {['Início', 'Método PAEV', 'Serviços', 'Quem Somos', 'Depoimentos'].map((item) => (
-                    <li key={item}>
-                      <a href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-zinc-400 hover:text-[#FABE01] text-sm flex items-center gap-2 transition-colors group">
-                        <ArrowRight className="w-3 h-3 text-[#FABE01] opacity-0 group-hover:opacity-100 transition-opacity" />
-                        {item}
-                      </a>
-                    </li>
-                ))}
+                <li>
+                  <a href="#hero" className="text-zinc-400 hover:text-[#FABE01] text-sm flex items-center gap-2 transition-colors group">
+                    <ArrowRight className="w-3 h-3 text-[#FABE01] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    Início
+                  </a>
+                </li>
+                <li>
+                  <a href="#metodo-paev" className="text-zinc-400 hover:text-[#FABE01] text-sm flex items-center gap-2 transition-colors group">
+                    <ArrowRight className="w-3 h-3 text-[#FABE01] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    Método PAEV
+                  </a>
+                </li>
+                <li>
+                  <a href="#services" className="text-zinc-400 hover:text-[#FABE01] text-sm flex items-center gap-2 transition-colors group">
+                    <ArrowRight className="w-3 h-3 text-[#FABE01] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    Serviços
+                  </a>
+                </li>
+                <li>
+                  <a href="#team" className="text-zinc-400 hover:text-[#FABE01] text-sm flex items-center gap-2 transition-colors group">
+                    <ArrowRight className="w-3 h-3 text-[#FABE01] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    Quem Somos
+                  </a>
+                </li>
+                <li>
+                  <a href="#testimonials" className="text-zinc-400 hover:text-[#FABE01] text-sm flex items-center gap-2 transition-colors group">
+                    <ArrowRight className="w-3 h-3 text-[#FABE01] opacity-0 group-hover:opacity-100 transition-opacity" />
+                    Depoimentos
+                  </a>
+                </li>
               </ul>
             </div>
 
-            {/* Coluna 3: Serviços */}
+            {/* Coluna 3: Serviços (Apenas Lista Visual) */}
             <div>
               <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#FABE01]" />
@@ -86,7 +108,7 @@ export const Footer = () => {
                 </li>
                 <li className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-[#FABE01] shrink-0" />
-                  <a href="https://wa.me/5513991187759" className="text-zinc-400 hover:text-white text-sm transition-colors">
+                  <a href="https://wa.me/5513991187759" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-white text-sm transition-colors">
                     (13) 99118-7759
                   </a>
                 </li>
