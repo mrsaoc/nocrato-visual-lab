@@ -2,7 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
+
+    /* --- ADICIONE ISTO AQUI --- */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Remove a rolagem suave se o usuário preferir movimento reduzido (Acessibilidade) */
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+    }
+
     :root {
         --background: 0 0% 100%;
         --foreground: 222.2 84% 4.9%;

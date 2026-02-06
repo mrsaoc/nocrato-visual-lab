@@ -9,7 +9,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { TrendingUp, Users, ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
-// --- IMPORTANDO SUAS IMAGENS LOCAIS (Mantidas conforme seu código) ---
+// Imagens
 import bricio1 from "@/assets/bricioepedro.png";
 import bricio2 from "@/assets/bricio2.jpeg";
 import pedro1 from "@/assets/pedro1.jpeg";
@@ -96,30 +96,27 @@ export const Hero = () => {
     }, [api]);
 
     return (
-        <section className="relative h-[100dvh] flex items-center overflow-hidden bg-[#111111] group/hero">
-
-            {/* --- CONTROLES MANUAIS --- */}
+        <section id="hero" className="relative h-[100dvh] flex items-center overflow-hidden bg-[#111111] group/hero">
+            {/* Setas de Navegação */}
             <button
                 onClick={() => api?.scrollPrev()}
-                className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/20 text-white/30 backdrop-blur-md transition-all
-        hover:bg-black/50 hover:text-[#FABE01] hover:border-[#FABE01]/50
+                className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/40 text-white/50 backdrop-blur-md transition-all
+        hover:bg-black/80 hover:text-[#FABE01] hover:border-[#FABE01]/50
         opacity-30 md:opacity-0 md:group-hover/hero:opacity-100 duration-500 cursor-pointer pointer-events-auto"
-                aria-label="Anterior"
             >
                 <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
             </button>
 
             <button
                 onClick={() => api?.scrollNext()}
-                className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/20 text-white/30 backdrop-blur-md transition-all
-        hover:bg-black/50 hover:text-[#FABE01] hover:border-[#FABE01]/50
+                className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/40 text-white/50 backdrop-blur-md transition-all
+        hover:bg-black/80 hover:text-[#FABE01] hover:border-[#FABE01]/50
         opacity-30 md:opacity-0 md:group-hover/hero:opacity-100 duration-500 cursor-pointer pointer-events-auto"
-                aria-label="Próximo"
             >
                 <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
             </button>
 
-            {/* --- CAMADA 1: CARROSSEL --- */}
+            {/* Carrossel */}
             <div className="absolute inset-0 z-0 cursor-grab active:cursor-grabbing">
                 <Carousel
                     setApi={setApi}
@@ -137,8 +134,12 @@ export const Hero = () => {
                                         className={`absolute inset-0 w-full h-full object-cover ${slide.align}`}
                                     />
 
-                                    {/* Gradiente Spotlight */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/50 to-transparent z-10" />
+                                    {/* --- AJUSTE DE CONTRASTE AQUI --- */}
+                                    {/* Gradiente Lateral mais forte (via-black/70) */}
+                                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent/20 z-10" />
+
+                                    {/* Gradiente Inferior mais alto para ajudar na leitura do rodapé */}
+                                    <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent z-10" />
                                 </div>
                             </CarouselItem>
                         ))}
@@ -146,22 +147,22 @@ export const Hero = () => {
                 </Carousel>
             </div>
 
-            {/* --- CAMADA 3: ELEMENTOS FLUTUANTES (AJUSTADO: MENORES E MAIS SUTIS) --- */}
+            {/* Elementos Flutuantes (Sutis) */}
             <div className="absolute inset-y-0 right-0 w-1/2 z-10 pointer-events-none hidden md:block max-w-[700px]">
-                {/* Card ROI - Reduzi tamanho, opacidade do fundo e bordas */}
-                <div className="absolute top-[25%] right-[5%] bg-black/20 backdrop-blur-sm border border-[#FABE01]/20 p-3 rounded-lg flex items-center gap-3 animate-float-slow shadow-none">
+                {/* ROI */}
+                <div className="absolute top-[25%] right-[5%] bg-black/40 backdrop-blur-sm border border-[#FABE01]/20 p-3 rounded-lg flex items-center gap-3 animate-float-slow shadow-lg">
                     <div className="bg-[#FABE01]/10 p-2 rounded-md">
                         <TrendingUp className="w-5 h-5 text-[#FABE01]" />
                     </div>
                     <div>
-                        <p className="text-white font-bold text-lg leading-none">+10x</p>
-                        <p className="text-zinc-400 text-[10px] uppercase tracking-wider font-semibold">Retorno em Vendas</p>
+                        <p className="text-white font-bold text-lg leading-none text-shadow-sm">+10x</p>
+                        <p className="text-zinc-300 text-[10px] uppercase tracking-wider font-semibold">Retorno em Vendas</p>
                     </div>
                 </div>
 
-                {/* Card Prova Social - Reduzi tamanho e opacidade */}
-                <div className="absolute bottom-[20%] right-[10%] bg-black/20 backdrop-blur-sm border border-white/5 p-3 rounded-lg flex items-center gap-3 animate-float-medium">
-                    <div className="bg-white/5 p-2 rounded-full">
+                {/* Prova Social */}
+                <div className="absolute bottom-[20%] right-[10%] bg-black/40 backdrop-blur-sm border border-white/10 p-3 rounded-lg flex items-center gap-3 animate-float-medium shadow-lg">
+                    <div className="bg-white/10 p-2 rounded-full">
                         <Users className="w-4 h-4 text-white" />
                     </div>
                     <div>
@@ -182,53 +183,31 @@ export const Hero = () => {
                     </div>
                 </div>
 
-                {/* Card Selo - Menor e mais transparente */}
+                {/* Selo */}
                 <div className="absolute bottom-[10%] right-[40%] bg-gradient-to-br from-[#FABE01]/50 to-[#DE7928]/50 p-[1px] rounded-full animate-float-fast opacity-80">
-                    <div className="bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-2">
+                    <div className="bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-2">
                         <ShieldCheck className="w-3 h-3 text-[#FABE01]" />
                         <span className="text-white text-[10px] font-bold uppercase tracking-widest">Método Validado</span>
                     </div>
                 </div>
             </div>
 
-            {/* --- EFEITOS DE FUNDO (COM ONDAS ANIMADAS) --- */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-                {/* Ondas Animadas - mix-blend-screen para misturar suavemente */}
-                <div className="absolute inset-0 md:right-0 md:left-auto md:w-[60%] overflow-hidden opacity-40 mix-blend-screen">
-                    <svg className="w-full h-full" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                        <path d="M800 800V200C700 350 600 250 500 400C400 550 300 450 200 600C100 750 0 650 0 800H800Z" fill="url(#gradient1)" fillOpacity="0.2" className="animate-float-slow" />
-                        <path d="M800 800V300C720 400 620 350 520 500C420 650 320 550 220 700C120 850 0 750 0 800H800Z" fill="url(#gradient2)" fillOpacity="0.2" className="animate-float-medium" style={{ animationDirection: "reverse" }} />
-                        <defs>
-                            <linearGradient id="gradient1" x1="400" y1="200" x2="400" y2="800" gradientUnits="userSpaceOnUse"><stop stopColor="#DE7928" /><stop offset="1" stopColor="#DE7928" stopOpacity="0" /></linearGradient>
-                            <linearGradient id="gradient2" x1="400" y1="300" x2="400" y2="800" gradientUnits="userSpaceOnUse"><stop stopColor="#FABE01" /><stop offset="1" stopColor="#FABE01" stopOpacity="0" /></linearGradient>
-                        </defs>
-                    </svg>
-                </div>
-
-                <div className="absolute top-[-10%] right-[-10%] w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-primary/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0" />
-                <div className="absolute bottom-[-10%] left-[-10%] w-[200px] md:w-[600px] h-[200px] md:h-[600px] bg-secondary/10 rounded-full blur-[60px] md:blur-[100px] pointer-events-none z-0" />
-                <div className="absolute inset-0 z-0 opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay pointer-events-none"></div>
-            </div>
-
-            {/* --- CAMADA 4: CONTEÚDO PRINCIPAL --- */}
+            {/* Conteúdo de Texto */}
             <div className="container relative z-20 h-full flex flex-col justify-center px-4 md:pl-28 md:pr-12 pt-24 md:pt-32 pointer-events-none">
-
                 <div className="w-full max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-
                     <div key={current} className="animate-in fade-in slide-in-from-bottom-8 duration-1000">
-
-                        <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-[#FABE01]/30 rounded-full bg-[#FABE01]/5 backdrop-blur-sm">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-[#FABE01]/30 rounded-full bg-[#FABE01]/10 backdrop-blur-sm shadow-md">
                             <Star className="w-3 h-3 text-[#FABE01] fill-[#FABE01]" />
                             <span className="text-[#FABE01] text-[10px] md:text-xs font-bold uppercase tracking-widest">
-                  {slides[current].tag}
-                </span>
+                                {slides[current].tag}
+                            </span>
                         </div>
 
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1]">
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] drop-shadow-lg">
                             {slides[current].title}
                         </h1>
 
-                        <p className="text-base sm:text-lg md:text-xl text-zinc-300 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0 font-medium text-shadow-sm min-h-[5rem] md:min-h-[4rem] flex items-start md:justify-start justify-center">
+                        <p className="text-base sm:text-lg md:text-xl text-zinc-200 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0 font-medium drop-shadow-md min-h-[5rem] md:min-h-[4rem] flex items-start md:justify-start justify-center">
                             {slides[current].description}
                         </p>
 
@@ -246,7 +225,6 @@ export const Hero = () => {
                             </a>
                         </Button>
                     </div>
-
                 </div>
             </div>
         </section>

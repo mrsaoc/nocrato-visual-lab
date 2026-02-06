@@ -43,8 +43,7 @@ export const Testimonials = () => {
     ];
 
     return (
-        <section className="relative py-24 bg-[#111111] overflow-hidden">
-            {/* Textura sutil invertida */}
+        <section id="testimonials" className="py-24 bg-[#0a0a0a] relative overflow-hidden">            {/* Textura sutil invertida */}
             <div
                 className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] invert"
                 style={{

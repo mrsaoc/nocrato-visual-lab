@@ -44,8 +44,7 @@ export const Method = () => {
     ];
 
     return (
-        <section className="py-16 md:py-20 bg-background">
-            <div className="container px-4">
+        <section id="metodo-paev" className="py-24 bg-[#111111] relative overflow-hidden">            <div className="container px-4">
                 <div className="text-center mb-12 md:mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-foreground">
                         Conheça nosso <span className="text-primary italic">método</span>

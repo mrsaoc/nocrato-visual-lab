@@ -22,7 +22,7 @@ export const Services = () => {
     ];
 
     return (
-        <section className="relative py-24 bg-[#111111] overflow-hidden border-t border-white/5">
+        <section id="services" className="relative py-24 bg-[#111111] overflow-hidden border-t border-white/5">
             {/* Textura de Fundo Sutil */}
             <div
                 className="absolute inset-0 z-0 pointer-events-none opacity-[0.03] invert"
@@ -76,9 +76,7 @@ export const Services = () => {
                                     {service.description}
                                 </p>
 
-                                <div className="flex items-center text-[#FABE01] text-sm font-bold uppercase tracking-widest gap-2 group-hover:gap-4 transition-all opacity-80 group-hover:opacity-100">
-                                    Saiba mais <ArrowRight className="w-4 h-4" />
-                                </div>
+
                             </div>
                         </div>
                     ))}

@@ -81,9 +81,7 @@ export const TargetAudience = () => {
                                     {segment.description}
                                 </p>
 
-                                <div className="flex items-center text-[#FABE01] text-xs font-bold uppercase tracking-widest gap-2 opacity-80 group-hover:opacity-100">
-                                    Especialidade <ArrowRight className="w-4 h-4" />
-                                </div>
+
                             </div>
                         </div>
                     ))}
