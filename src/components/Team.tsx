@@ -10,12 +10,7 @@ import textureImg from "@/assets/image-removebg-preview.png";
 export const Team = () => {
     // Dados da Equipe
     const team = [
-        {
-            name: "MARCOS",
-            role: "EDITOR & DEV",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop",
-            badge: "AUDIOVISUAL",
-        },
+
         {
             name: "BRÍCIO",
             role: "ESTRATEGISTA",
@@ -40,6 +35,12 @@ export const Team = () => {
             role: "DESIGNER",
             image: sophiaImg,
             badge: "DESIGNER",
+        },
+        {
+            name: "MARCOS",
+            role: "EDITOR & DEV",
+            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop",
+            badge: "AUDIOVISUAL",
         },
     ];
 
