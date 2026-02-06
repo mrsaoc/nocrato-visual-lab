@@ -10,8 +10,10 @@ import Autoplay from "embla-carousel-autoplay";
 import { TrendingUp, Users, ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 // --- IMPORTANDO SUAS IMAGENS LOCAIS ---
-import bricio1 from "@/assets/bricio1.jpeg";
+import bricio1 from "@/assets/bricioepedro.png";
 import bricio2 from "@/assets/bricio2.jpeg";
+import pedro1 from "@/assets/pedro1.jpeg";
+import pedro2 from "@/assets/pedro2.jpeg";
 
 export const Hero = () => {
     const [api, setApi] = useState<CarouselApi>();
@@ -24,6 +26,11 @@ export const Hero = () => {
     const slides = [
         {
             image: bricio1,
+            // AJUSTE FINO DE ENQUADRAMENTO:
+            // object-[center_35%] posiciona o foco da imagem a 35% do topo.
+            // Isso geralmente coloca o rosto logo abaixo do header de forma natural.
+            // Se ainda cortar um pouco, tente 40%. Se ficar muito baixo, tente 30%.
+            align: "object-[center_35%]",
             tag: "Marketing de Raiz Forte",
             title: (
                 <>
@@ -36,7 +43,22 @@ export const Hero = () => {
             description: "Para aumentar seu engajamento e número de vendas com a resiliência de quem conhece o terreno."
         },
         {
+            image: pedro1,
+            align: "object-[center_35%]", // Ajuste fino para o Pedro
+            tag: "Alta Performance",
+            title: (
+                <>
+                    Tenha sua agenda{" "}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FABE01] to-[#DE7928]">
+            lotada
+          </span>
+                </>
+            ),
+            description: "Campanhas de tráfego pago otimizadas para atrair o público particular qualificado que sua clínica merece."
+        },
+        {
             image: bricio2,
+            align: "object-[center_35%]", // Ajuste fino para a segunda foto do Bricio
             tag: "Autoridade Médica",
             title: (
                 <>
@@ -49,17 +71,18 @@ export const Hero = () => {
             description: "Posicionamento estratégico e ético para médicos que desejam ser a referência número 1 na sua especialidade."
         },
         {
-            image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1920&auto=format&fit=crop",
-            tag: "Alta Performance",
+            image: pedro2,
+            align: "object-[center_35%]", // Ajuste fino para a segunda foto do Pedro
+            tag: "Tecnologia Exclusiva",
             title: (
                 <>
-                    Tenha sua agenda{" "}
+                    Sua clínica na vanguarda da{" "}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FABE01] to-[#DE7928]">
-            lotada
+            inovação
           </span>
                 </>
             ),
-            description: "Campanhas de tráfego pago otimizadas para atrair o público particular qualificado que sua clínica merece."
+            description: "Sites de alta conversão e sistemas inteligentes que trabalham para você 24 horas por dia."
         }
     ];
 
@@ -77,11 +100,13 @@ export const Hero = () => {
     }, [api]);
 
     return (
+        // Voltei para h-[100dvh] e tela cheia normal
         <section className="relative h-[100dvh] flex items-center overflow-hidden bg-[#111111] group/hero">
 
             {/* --- CONTROLES MANUAIS --- */}
             <button
                 onClick={() => api?.scrollPrev()}
+                // Voltei o top para 1/2 (centro da tela)
                 className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/20 text-white/30 backdrop-blur-md transition-all
         hover:bg-black/50 hover:text-[#FABE01] hover:border-[#FABE01]/50
         opacity-30 md:opacity-0 md:group-hover/hero:opacity-100 duration-500 cursor-pointer pointer-events-auto"
@@ -101,6 +126,7 @@ export const Hero = () => {
             </button>
 
             {/* --- CAMADA 1: CARROSSEL --- */}
+            {/* Voltei para tela cheia: absolute inset-0 h-full */}
             <div className="absolute inset-0 z-0 cursor-grab active:cursor-grabbing">
                 <Carousel
                     setApi={setApi}
@@ -115,17 +141,15 @@ export const Hero = () => {
                                     <img
                                         src={slide.image}
                                         alt={`Slide ${index + 1}`}
-                                        // Mantive o foco um pouco acima do centro para rostos
-                                        className="absolute inset-0 w-full h-full object-cover object-[center_35%]"
+                                        // O align aqui (ex: object-[center_35%]) vai garantir o enquadramento correto sem zoom excessivo
+                                        className={`absolute inset-0 w-full h-full object-cover ${slide.align}`}
                                     />
 
-                                    {/* --- O SEGREDO DO DESTAQUE ---
-                      Substituí os gradientes antigos e a máscara global por este NOVO GRADIENTE LATERAL.
-                      - from-[#111111]: Começa quase preto na esquerda (atrás do texto).
-                      - via-[#111111]/60: Fica meio transparente no meio.
-                      - to-transparent: Fica totalmente transparente na direita, revelando a foto.
+                                    {/* GRADIENTE SPOTLIGHT
+                      Ajustei para ser um pouco mais transparente no meio (via-[#111111]/50)
+                      para a pessoa aparecer mais.
                   */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/60 to-transparent z-10" />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-[#111111] via-[#111111]/50 to-transparent z-10" />
                                 </div>
                             </CarouselItem>
                         ))}
@@ -133,12 +157,8 @@ export const Hero = () => {
                 </Carousel>
             </div>
 
-            {/* --- CAMADA 2: MÁSCARA ESCURA GLOBAL ---
-          REMOVIDA! A linha abaixo foi deletada para não apagar a imagem.
-          <div className="absolute inset-0 z-0 bg-[#111111]/85 pointer-events-none" />
-      */}
-
             {/* --- CAMADA 3: ELEMENTOS FLUTUANTES --- */}
+            {/* Voltei o posicionamento original */}
             <div className="absolute inset-y-0 right-0 w-1/2 z-10 pointer-events-none hidden md:block max-w-[700px]">
                 {/* Card ROI */}
                 <div className="absolute top-[25%] right-[10%] bg-black/40 backdrop-blur-md border border-[#FABE01]/30 p-4 rounded-xl flex items-center gap-4 animate-float-slow shadow-[0_0_30px_rgba(250,190,1,0.1)]">
@@ -187,19 +207,6 @@ export const Hero = () => {
             <div className="absolute top-[-10%] right-[-10%] w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-primary/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none z-0" />
             <div className="absolute bottom-[-10%] left-[-10%] w-[200px] md:w-[600px] h-[200px] md:h-[600px] bg-secondary/10 rounded-full blur-[60px] md:blur-[100px] pointer-events-none z-0" />
             <div className="absolute inset-0 z-0 opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay pointer-events-none"></div>
-
-            <div className="absolute inset-0 md:right-0 md:left-auto md:w-[60%] z-0 pointer-events-none overflow-hidden opacity-30 md:opacity-80">
-                <svg className="w-full h-full" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                    <path d="M800 800V200C700 350 600 250 500 400C400 550 300 450 200 600C100 750 0 650 0 800H800Z" fill="url(#gradient1)" fillOpacity="0.2" className="animate-float-slow" />
-                    <path d="M800 800V300C720 400 620 350 520 500C420 650 320 550 220 700C120 850 0 750 0 800H800Z" fill="url(#gradient2)" fillOpacity="0.3" className="animate-float-medium" style={{ animationDirection: "reverse" }} />
-                    <path d="M800 800V400C750 450 650 400 550 550C450 700 350 600 250 750C150 900 0 850 0 800H800Z" fill="url(#gradient3)" fillOpacity="0.4" className="animate-float-fast" />
-                    <defs>
-                        <linearGradient id="gradient1" x1="400" y1="200" x2="400" y2="800" gradientUnits="userSpaceOnUse"><stop stopColor="#DE7928" /><stop offset="1" stopColor="#DE7928" stopOpacity="0" /></linearGradient>
-                        <linearGradient id="gradient2" x1="400" y1="300" x2="400" y2="800" gradientUnits="userSpaceOnUse"><stop stopColor="#FABE01" /><stop offset="1" stopColor="#FABE01" stopOpacity="0" /></linearGradient>
-                        <linearGradient id="gradient3" x1="400" y1="400" x2="400" y2="800" gradientUnits="userSpaceOnUse"><stop stopColor="#FABE01" /><stop offset="1" stopColor="#DE7928" stopOpacity="0" /></linearGradient>
-                    </defs>
-                </svg>
-            </div>
 
             {/* --- CAMADA 4: CONTEÚDO PRINCIPAL --- */}
             <div className="container relative z-20 h-full flex flex-col justify-center px-4 md:pl-28 md:pr-12 pt-24 md:pt-32 pointer-events-none">

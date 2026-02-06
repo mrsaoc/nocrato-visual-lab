@@ -12,7 +12,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 // --- IMPORTANDO SUAS IMAGENS ---
 import bricioImg from "@/assets/bricio.png";
-import pedroImg from "@/assets/pedro.png";
+import pedroImg from "@/assets/pedroteam.jpeg";
 import sophiaImg from "@/assets/sophia.png";
 import textureImg from "@/assets/image-removebg-preview.png";
 
