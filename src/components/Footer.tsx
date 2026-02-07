@@ -50,7 +50,7 @@ export const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#metodo-paev" className="text-zinc-400 hover:text-[#FABE01] text-sm flex items-center gap-2 transition-colors group">
+                  <a href="#method" className="text-zinc-400 hover:text-[#FABE01] text-sm flex items-center gap-2 transition-colors group">
                     <ArrowRight className="w-3 h-3 text-[#FABE01] opacity-0 group-hover:opacity-100 transition-opacity" />
                     Método PAEV
                   </a>

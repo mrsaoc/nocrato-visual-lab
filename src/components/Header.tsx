@@ -6,30 +6,44 @@ import { Menu, X } from "lucide-react";
 export const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState(""); // Novo estado para ScrollSpy
 
-    // Efeito para mudar o fundo do header ao rolar
+    // Links de Navegação (Mesmos do seu código)
+    const navLinks = [
+        { name: "Início", href: "#hero", id: "hero" },
+        { name: "Método PAEV", href: "#method", id: "method" },
+        { name: "Serviços", href: "#services", id: "services" },
+        { name: "Depoimentos", href: "#testimonials", id: "testimonials" },
+        { name: "Quem Somos", href: "#team", id: "team" },
+    ];
+
     useEffect(() => {
         const handleScroll = () => {
+            // Lógica do Fundo do Header
             if (window.scrollY > 50) {
                 setIsScrolled(true);
             } else {
                 setIsScrolled(false);
+            }
+
+            // Lógica do ScrollSpy (Detectar seção ativa)
+            const scrollPosition = window.scrollY + 150; // Offset para ativar um pouco antes
+
+            for (const link of navLinks) {
+                const section = document.getElementById(link.id);
+                if (
+                    section &&
+                    section.offsetTop <= scrollPosition &&
+                    (section.offsetTop + section.offsetHeight) > scrollPosition
+                ) {
+                    setActiveSection(link.id);
+                }
             }
         };
 
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
-
-    // Links de Navegação
-    const navLinks = [
-        { name: "Início", href: "#hero" }, // Assumindo que o Hero tem id="hero" ou é o topo
-        { name: "Método PAEV", href: "#metodo-paev" },
-        { name: "Serviços", href: "#services" },
-        { name: "Depoimentos", href: "#testimonials" },
-        { name: "Quem Somos", href: "#team" }, // Linkando para a seção do Time
-
-    ];
 
     return (
         <header
@@ -42,11 +56,10 @@ export const Header = () => {
             <div className="container px-4 flex justify-between items-center">
 
                 {/* LOGO */}
-                <a href="#" className="relative z-50">
+                <a href="#hero" className="relative z-50">
                     <img
                         src={logo}
                         alt="Brício Marketing"
-                        // brightness-0 invert para ficar branca, igual ao footer
                         className="h-8 md:h-10 w-auto brightness-0 invert hover:opacity-80 transition-opacity"
                     />
                 </a>
@@ -57,17 +70,26 @@ export const Header = () => {
                         <a
                             key={link.name}
                             href={link.href}
-                            className="text-sm font-medium text-zinc-300 hover:text-[#FABE01] transition-colors relative group"
+                            className={`text-sm font-medium transition-colors relative group ${
+                                activeSection === link.id
+                                    ? "text-[#FABE01]" // Seção ativa fica Dourada
+                                    : "text-zinc-300 hover:text-[#FABE01]" // Padrão
+                            }`}
                         >
                             {link.name}
-                            {/* Linha dourada animada no hover */}
-                            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#FABE01] transition-all duration-300 group-hover:w-full" />
+
+                            {/* Linha dourada: Aparece no hover OU se for a seção ativa */}
+                            <span
+                                className={`absolute -bottom-1 left-0 h-[2px] bg-[#FABE01] transition-all duration-300 ${
+                                    activeSection === link.id ? "w-full" : "w-0 group-hover:w-full"
+                                }`}
+                            />
                         </a>
                     ))}
 
                     <Button
                         asChild
-                        className="bg-[#FABE01] hover:bg-[#FABE01]/90 text-black font-bold rounded-full px-6"
+                        className="bg-[#FABE01] hover:bg-[#FABE01]/90 text-black font-bold rounded-full px-6 shadow-[0_0_15px_rgba(250,190,1,0.3)] hover:shadow-[0_0_25px_rgba(250,190,1,0.5)] transition-all"
                     >
                         <a href="#contact">Fale Conosco</a>
                     </Button>
@@ -101,8 +123,10 @@ export const Header = () => {
                             <a
                                 key={link.name}
                                 href={link.href}
-                                onClick={() => setIsMobileMenuOpen(false)} // Fecha ao clicar
-                                className="text-2xl font-bold text-white hover:text-[#FABE01] transition-colors"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className={`text-2xl font-bold transition-colors ${
+                                    activeSection === link.id ? "text-[#FABE01]" : "text-white hover:text-[#FABE01]"
+                                }`}
                             >
                                 {link.name}
                             </a>

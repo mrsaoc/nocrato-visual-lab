@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@/components/ui/button"; // Importando botão
 
 const Icons = {
     Sun: (props: React.SVGProps<SVGSVGElement>) => (
@@ -25,44 +26,35 @@ const Icons = {
 
 export const Method = () => {
     const steps = [
-        {
-            icon: Icons.Sun,
-            label: "Posicionamento",
-        },
-        {
-            icon: Icons.Eye,
-            label: "Análise de Mercado",
-        },
-        {
-            icon: null,
-            label: "Estratégia",
-        },
-        {
-            icon: Icons.Hands,
-            label: "Venda",
-        },
+        { icon: Icons.Sun, label: "Posicionamento" },
+        { icon: Icons.Eye, label: "Análise de Mercado" },
+        { icon: null, label: "Estratégia" },
+        { icon: Icons.Hands, label: "Venda" },
     ];
 
+    const scrollToContact = () => {
+        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    };
+
     return (
-        <section id="metodo-paev" className="py-24 bg-[#111111] relative overflow-hidden">            <div className="container px-4">
+        <section id="method" className="py-16 md:py-24 bg-background">
+            <div className="container px-4">
                 <div className="text-center mb-12 md:mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-foreground">
                         Conheça nosso <span className="text-primary italic">método</span>
                     </h2>
 
-                    <p className="text-sm md:text-base text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                         A Nocrato Marketing transforma sua presença digital em resultados reais. Com o método PAEV,
                         criamos estratégias inovadoras para aumentar o engajamento da sua empresa e impulsionar suas
                         vendas online.
                     </p>
                 </div>
 
-                <div className="flex justify-center items-center max-w-5xl mx-auto">
-                    {/* MOBILE: flex-col | DESKTOP: flex-row */}
+                <div className="flex justify-center items-center max-w-5xl mx-auto mb-16">
                     <div className="flex flex-col md:flex-row justify-center items-center md:items-start gap-0 md:gap-0 w-full">
                         {steps.map((step, index) => (
                             <div key={index} className="flex flex-col md:flex-row items-center relative w-full md:w-auto">
-
                                 <div className="flex flex-col items-center gap-3 z-10 w-full md:w-32">
                                     {step.label === "Estratégia" ? (
                                         <div className="relative w-20 h-20 flex items-center justify-center my-2 md:my-0">
@@ -82,16 +74,25 @@ export const Method = () => {
 
                                 {index < steps.length - 1 && (
                                     <>
-                                        {/* LINHA DESKTOP (Horizontal) */}
                                         <div className="hidden md:block w-16 lg:w-24 h-0.5 bg-border mx-[-10px] mt-10 relative z-0" />
-
-                                        {/* LINHA MOBILE (Vertical) */}
                                         <div className="md:hidden w-0.5 h-12 bg-border my-[-10px] relative z-0" />
                                     </>
                                 )}
                             </div>
                         ))}
                     </div>
+                </div>
+
+                {/* CTA Intermediário */}
+                <div className="text-center">
+                    <Button
+                        size="lg"
+                        variant="outline"
+                        className="border-[#FABE01] text-[#FABE01] hover:bg-[#FABE01] hover:text-black transition-all"
+                        onClick={scrollToContact}
+                    >
+                        Quero aplicar este método
+                    </Button>
                 </div>
             </div>
         </section>
