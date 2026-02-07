@@ -9,13 +9,19 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { TrendingUp, Users, ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
-// Imagens
+// Imagens (Mantenha suas importações atuais)
 import bricio1 from "@/assets/bricioepedro.png";
 import bricio2 from "@/assets/bricio2.jpeg";
 import pedro1 from "@/assets/pedro1.jpeg";
 import pedro2 from "@/assets/pedro2.jpeg";
 
-export const Hero = () => {
+// 1. AQUI ESTÁ A CORREÇÃO: Definimos que o Hero aceita 'onInterest'
+interface HeroProps {
+    onInterest?: (interest: string) => void;
+}
+
+// 2. Recebemos a prop aqui
+export const Hero = ({ onInterest }: HeroProps) => {
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
 
@@ -95,8 +101,21 @@ export const Hero = () => {
         });
     }, [api]);
 
+    // Função para tratar o clique no CTA
+    const handleCtaClick = () => {
+        // Se a função onInterest foi passada pelo Index, usamos ela
+        if (onInterest) {
+            const currentInterest = slides[current].tag;
+            onInterest(`Banner: ${currentInterest}`);
+        } else {
+            // Fallback: se não passar a prop, apenas rola para o contato (comportamento antigo)
+            window.open("http://wa.me/5513991187759", "_blank");
+        }
+    };
+
     return (
         <section id="hero" className="relative h-[100dvh] flex items-center overflow-hidden bg-[#111111] group/hero">
+
             {/* Setas de Navegação */}
             <button
                 onClick={() => api?.scrollPrev()}
@@ -133,12 +152,7 @@ export const Hero = () => {
                                         alt={`Slide ${index + 1}`}
                                         className={`absolute inset-0 w-full h-full object-cover ${slide.align}`}
                                     />
-
-                                    {/* --- AJUSTE DE CONTRASTE AQUI --- */}
-                                    {/* Gradiente Lateral mais forte (via-black/70) */}
                                     <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent/20 z-10" />
-
-                                    {/* Gradiente Inferior mais alto para ajudar na leitura do rodapé */}
                                     <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent z-10" />
                                 </div>
                             </CarouselItem>
@@ -147,9 +161,8 @@ export const Hero = () => {
                 </Carousel>
             </div>
 
-            {/* Elementos Flutuantes (Sutis) */}
+            {/* Elementos Flutuantes */}
             <div className="absolute inset-y-0 right-0 w-1/2 z-10 pointer-events-none hidden md:block max-w-[700px]">
-                {/* ROI */}
                 <div className="absolute top-[25%] right-[5%] bg-black/40 backdrop-blur-sm border border-[#FABE01]/20 p-3 rounded-lg flex items-center gap-3 animate-float-slow shadow-lg">
                     <div className="bg-[#FABE01]/10 p-2 rounded-md">
                         <TrendingUp className="w-5 h-5 text-[#FABE01]" />
@@ -160,7 +173,6 @@ export const Hero = () => {
                     </div>
                 </div>
 
-                {/* Prova Social */}
                 <div className="absolute bottom-[20%] right-[10%] bg-black/40 backdrop-blur-sm border border-white/10 p-3 rounded-lg flex items-center gap-3 animate-float-medium shadow-lg">
                     <div className="bg-white/10 p-2 rounded-full">
                         <Users className="w-4 h-4 text-white" />
@@ -183,7 +195,6 @@ export const Hero = () => {
                     </div>
                 </div>
 
-                {/* Selo */}
                 <div className="absolute bottom-[10%] right-[40%] bg-gradient-to-br from-[#FABE01]/50 to-[#DE7928]/50 p-[1px] rounded-full animate-float-fast opacity-80">
                     <div className="bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-2">
                         <ShieldCheck className="w-3 h-3 text-[#FABE01]" />
@@ -211,18 +222,13 @@ export const Hero = () => {
                             {slides[current].description}
                         </p>
 
+                        {/* 3. Botão atualizado para usar a função de clique */}
                         <Button
                             size="lg"
                             className="w-full md:w-auto bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold px-8 py-6 text-lg rounded-sm transition-all hover:scale-105 shadow-[0_0_20px_rgba(250,190,1,0.3)] hover:shadow-[0_0_30px_rgba(250,190,1,0.5)] pointer-events-auto"
-                            asChild
+                            onClick={handleCtaClick}
                         >
-                            <a
-                                href="http://wa.me/5513991187759"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Fale com um especialista
-                            </a>
+                            Fale com um especialista
                         </Button>
                     </div>
                 </div>

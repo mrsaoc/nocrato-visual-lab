@@ -1,5 +1,10 @@
 import React from "react";
-import { Button } from "@/components/ui/button"; // Importando botão
+import { Button } from "@/components/ui/button";
+
+// Interface para receber a função do Index.tsx
+interface MethodProps {
+    onInterest?: (interest: string) => void;
+}
 
 const Icons = {
     Sun: (props: React.SVGProps<SVGSVGElement>) => (
@@ -24,7 +29,7 @@ const Icons = {
     )
 };
 
-export const Method = () => {
+export const Method = ({ onInterest }: MethodProps) => {
     const steps = [
         { icon: Icons.Sun, label: "Posicionamento" },
         { icon: Icons.Eye, label: "Análise de Mercado" },
@@ -32,8 +37,14 @@ export const Method = () => {
         { icon: Icons.Hands, label: "Venda" },
     ];
 
-    const scrollToContact = () => {
-        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+    const handleCtaClick = () => {
+        if (onInterest) {
+            // Usa a navegação inteligente se disponível
+            onInterest("Método PAEV");
+        } else {
+            // Fallback para scroll simples se a prop não for passada
+            document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+        }
     };
 
     return (
@@ -89,7 +100,7 @@ export const Method = () => {
                         size="lg"
                         variant="outline"
                         className="border-[#FABE01] text-[#FABE01] hover:bg-[#FABE01] hover:text-black transition-all"
-                        onClick={scrollToContact}
+                        onClick={handleCtaClick}
                     >
                         Quero aplicar este método
                     </Button>

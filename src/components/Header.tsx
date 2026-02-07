@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Progress } from "@/components/ui/progress"; // Se tiver componente, ou div simples
 
 export const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState(""); // Novo estado para ScrollSpy
+    const [activeSection, setActiveSection] = useState("");
+    const [scrollProgress, setScrollProgress] = useState(0); // Estado para a barra de progresso (Mudança 3)
 
-    // Links de Navegação (Mesmos do seu código)
     const navLinks = [
         { name: "Início", href: "#hero", id: "hero" },
         { name: "Método PAEV", href: "#method", id: "method" },
@@ -19,16 +20,11 @@ export const Header = () => {
 
     useEffect(() => {
         const handleScroll = () => {
-            // Lógica do Fundo do Header
-            if (window.scrollY > 50) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
+            // Lógica do Fundo
+            setIsScrolled(window.scrollY > 50);
 
-            // Lógica do ScrollSpy (Detectar seção ativa)
-            const scrollPosition = window.scrollY + 150; // Offset para ativar um pouco antes
-
+            // Lógica do ScrollSpy
+            const scrollPosition = window.scrollY + 150;
             for (const link of navLinks) {
                 const section = document.getElementById(link.id);
                 if (
@@ -39,6 +35,12 @@ export const Header = () => {
                     setActiveSection(link.id);
                 }
             }
+
+            // Lógica da Barra de Progresso (Mudança 3)
+            const totalScroll = document.documentElement.scrollTop;
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scroll = `${totalScroll / windowHeight}`;
+            setScrollProgress(Number(scroll) * 100);
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -53,6 +55,9 @@ export const Header = () => {
                     : "bg-transparent border-transparent py-6"
             }`}
         >
+            {/* Barra de Progresso de Leitura */}
+            <div className="absolute bottom-0 left-0 h-[2px] bg-[#FABE01] transition-all duration-100 ease-out z-50" style={{ width: `${scrollProgress}%` }} />
+
             <div className="container px-4 flex justify-between items-center">
 
                 {/* LOGO */}
@@ -72,13 +77,11 @@ export const Header = () => {
                             href={link.href}
                             className={`text-sm font-medium transition-colors relative group ${
                                 activeSection === link.id
-                                    ? "text-[#FABE01]" // Seção ativa fica Dourada
-                                    : "text-zinc-300 hover:text-[#FABE01]" // Padrão
+                                    ? "text-[#FABE01]"
+                                    : "text-zinc-300 hover:text-[#FABE01]"
                             }`}
                         >
                             {link.name}
-
-                            {/* Linha dourada: Aparece no hover OU se for a seção ativa */}
                             <span
                                 className={`absolute -bottom-1 left-0 h-[2px] bg-[#FABE01] transition-all duration-300 ${
                                     activeSection === link.id ? "w-full" : "w-0 group-hover:w-full"
@@ -95,7 +98,7 @@ export const Header = () => {
                     </Button>
                 </nav>
 
-                {/* BOTÃO MOBILE (Hambúrguer) */}
+                {/* BOTÃO MOBILE */}
                 <button
                     className="md:hidden text-white z-50 p-2"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -107,15 +110,14 @@ export const Header = () => {
                     )}
                 </button>
 
-                {/* MENU MOBILE (Overlay) */}
+                {/* MENU MOBILE Melhorado (Backdrop Blur e transparência) (Mudança 3) */}
                 <div
-                    className={`fixed inset-0 bg-[#111111] z-40 flex flex-col items-center justify-center gap-8 transition-all duration-300 ${
+                    className={`fixed inset-0 bg-[#111111]/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 transition-all duration-300 ${
                         isMobileMenuOpen
                             ? "opacity-100 visible"
                             : "opacity-0 invisible pointer-events-none"
                     }`}
                 >
-                    {/* Fundo decorativo */}
                     <div className="absolute top-[-20%] right-[-10%] w-[300px] h-[300px] bg-[#FABE01]/10 rounded-full blur-[100px] pointer-events-none" />
 
                     <nav className="flex flex-col items-center gap-8 relative z-10">

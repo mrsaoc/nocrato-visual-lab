@@ -1,8 +1,16 @@
 import { ArrowRight } from "lucide-react";
 import textureImg from "@/assets/image-removebg-preview.png";
 
-export const Services = () => {
-    const scrollToContact = () => {
+interface ServicesProps {
+    onSelectService: (serviceName: string) => void;
+}
+
+export const Services = ({ onSelectService }: ServicesProps) => {
+    const handleServiceClick = (serviceTitle: string) => {
+        // 1. Define o serviço de interesse no estado pai
+        onSelectService(serviceTitle);
+
+        // 2. Rola suavemente para o contato
         document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
     };
 
@@ -50,7 +58,7 @@ export const Services = () => {
                     {services.map((service, index) => (
                         <div
                             key={index}
-                            onClick={scrollToContact}
+                            onClick={() => handleServiceClick(service.title)} //
                             className="group relative bg-[#161616] rounded-sm overflow-hidden border border-white/5 hover:border-[#FABE01]/40 transition-all duration-500 shadow-lg hover:shadow-[0_10px_40px_-15px_rgba(250,190,1,0.2)] flex flex-col h-full cursor-pointer"
                         >
                             <div className="h-64 overflow-hidden relative">
