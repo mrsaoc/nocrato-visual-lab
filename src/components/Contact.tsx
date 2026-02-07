@@ -46,13 +46,19 @@ export const Contact = ({ interestedService }: ContactProps) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (currentStep === 0) nameInputRef.current?.focus();
+      // CORREÇÃO: Só foca no Nome (passo 0) se tiver vindo de um botão (interestedService)
+      // Se não, o usuário deve clicar manualmente para começar, evitando o scroll indesejado.
+      if (currentStep === 0 && interestedService) {
+        nameInputRef.current?.focus();
+      }
+
+      // Nos outros passos, o foco é sempre automático pois o usuário já está interagindo
       if (currentStep === 1) phoneInputRef.current?.focus();
       if (currentStep === 2) emailInputRef.current?.focus();
       if (currentStep === 3 && isTypingOther) otherSpecInputRef.current?.focus();
     }, 100);
     return () => clearTimeout(timer);
-  }, [currentStep, isTypingOther]);
+  }, [currentStep, isTypingOther, interestedService]);
 
   const formatPhone = (value: string) => {
     return value
@@ -105,7 +111,6 @@ export const Contact = ({ interestedService }: ContactProps) => {
     setLoading(true);
 
     try {
-      // Envia apenas colunas existentes no Supabase
       const { error } = await supabase
           .from('leads')
           .insert([
@@ -167,7 +172,7 @@ Aguardo o contato da equipe.`;
 
         <div className="container relative z-10 px-4 max-w-4xl mx-auto">
 
-          {/* TELA DE SUCESSO - MINIMALISTA & SÉRIA */}
+          {/* TELA DE SUCESSO */}
           {currentStep === 4 ? (
               <div className="flex flex-col items-center justify-center text-center animate-in fade-in duration-1000 slide-in-from-bottom-4">
 
@@ -201,10 +206,10 @@ Aguardo o contato da equipe.`;
                 </Button>
               </div>
           ) : (
-              /* FORMULÁRIO STEP BY STEP */
+              /* FORMULÁRIO */
               <div className="w-full max-w-2xl mx-auto">
 
-                {/* Barra de Progresso Minimalista */}
+                {/* Barra de Progresso */}
                 <div className="w-full h-[2px] bg-zinc-900 mb-16 relative">
                   <div
                       className="absolute top-0 left-0 h-full bg-[#FABE01] transition-all duration-700 ease-out shadow-[0_0_10px_#FABE01]"
