@@ -35,7 +35,7 @@ const Success = () => {
 
             {/* Footerzinho */}
             <p className="mt-12 text-zinc-600 text-sm">
-                © {new Date().getFullYear()} Brício Marketing Médico
+                © {new Date().getFullYear()} Agência Nocrato
             </p>
         </div>
     );
