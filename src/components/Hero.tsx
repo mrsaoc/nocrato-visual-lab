@@ -9,19 +9,13 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { TrendingUp, Users, ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
-// Imagens (Mantenha suas importações atuais)
+// Imagens
 import bricio1 from "@/assets/bricioepedro.png";
 import bricio2 from "@/assets/bricio2.jpeg";
 import pedro1 from "@/assets/pedro1.jpeg";
 import pedro2 from "@/assets/pedro2.jpeg";
 
-// 1. AQUI ESTÁ A CORREÇÃO: Definimos que o Hero aceita 'onInterest'
-interface HeroProps {
-    onInterest?: (interest: string) => void;
-}
-
-// 2. Recebemos a prop aqui
-export const Hero = ({ onInterest }: HeroProps) => {
+export const Hero = () => {
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
 
@@ -101,42 +95,53 @@ export const Hero = ({ onInterest }: HeroProps) => {
         });
     }, [api]);
 
-    // Função para tratar o clique no CTA
-    const handleCtaClick = () => {
-        // Se a função onInterest foi passada pelo Index, usamos ela
-        if (onInterest) {
-            const currentInterest = slides[current].tag;
-            onInterest(`Banner: ${currentInterest}`);
-        } else {
-            // Fallback: se não passar a prop, apenas rola para o contato (comportamento antigo)
-            window.open("http://wa.me/5513991187759", "_blank");
-        }
-    };
-
     return (
         <section id="hero" className="relative h-[100dvh] flex items-center overflow-hidden bg-[#111111] group/hero">
 
-            {/* Setas de Navegação */}
-            <button
-                onClick={() => api?.scrollPrev()}
-                className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/40 text-white/50 backdrop-blur-md transition-all
-        hover:bg-black/80 hover:text-[#FABE01] hover:border-[#FABE01]/50
-        opacity-30 md:opacity-0 md:group-hover/hero:opacity-100 duration-500 cursor-pointer pointer-events-auto"
-            >
-                <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
-            </button>
+            {/* --- CONTROLES MANUAIS (Apenas Desktop) --- */}
+            <div className="hidden md:block">
+                <button
+                    onClick={() => api?.scrollPrev()}
+                    className="absolute left-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/40 text-white/50 backdrop-blur-md transition-all
+            hover:bg-black/80 hover:text-[#FABE01] hover:border-[#FABE01]/50
+            opacity-0 group-hover/hero:opacity-100 duration-500 cursor-pointer pointer-events-auto"
+                >
+                    <ChevronLeft className="w-8 h-8" />
+                </button>
 
-            <button
-                onClick={() => api?.scrollNext()}
-                className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/40 text-white/50 backdrop-blur-md transition-all
-        hover:bg-black/80 hover:text-[#FABE01] hover:border-[#FABE01]/50
-        opacity-30 md:opacity-0 md:group-hover/hero:opacity-100 duration-500 cursor-pointer pointer-events-auto"
-            >
-                <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
-            </button>
+                <button
+                    onClick={() => api?.scrollNext()}
+                    className="absolute right-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/40 text-white/50 backdrop-blur-md transition-all
+            hover:bg-black/80 hover:text-[#FABE01] hover:border-[#FABE01]/50
+            opacity-0 group-hover/hero:opacity-100 duration-500 cursor-pointer pointer-events-auto"
+                >
+                    <ChevronRight className="w-8 h-8" />
+                </button>
+            </div>
 
-            {/* Carrossel */}
-            <div className="absolute inset-0 z-0 cursor-grab active:cursor-grabbing">
+            {/* =========================================================
+                VERSÃO MOBILE: APENAS 1 IMAGEM ESTÁTICA COM AJUSTE DE FOCO
+               ========================================================= */}
+            <div className="md:hidden absolute inset-0 z-0">
+                <div className="relative w-full h-full">
+                    <img
+                        src={slides[0].image}
+                        alt="Hero Mobile"
+                        // MUDANÇA AQUI: object-[80%_center]
+                        // Movendo mais para a "esquerda" visualmente (mostrando mais o lado direito da foto original)
+                        className="absolute inset-0 w-full h-full object-cover object-[80%_center]"
+                    />
+
+                    {/* Gradiente Escuro no Mobile para garantir leitura do texto */}
+                    <div className="absolute inset-0 bg-black/50 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent z-10" />
+                </div>
+            </div>
+
+            {/* =========================================================
+                VERSÃO DESKTOP: CARROSSEL COMPLETO
+               ========================================================= */}
+            <div className="hidden md:block absolute inset-0 z-0 cursor-grab active:cursor-grabbing">
                 <Carousel
                     setApi={setApi}
                     plugins={[plugin.current]}
@@ -152,6 +157,7 @@ export const Hero = ({ onInterest }: HeroProps) => {
                                         alt={`Slide ${index + 1}`}
                                         className={`absolute inset-0 w-full h-full object-cover ${slide.align}`}
                                     />
+                                    {/* Gradientes Desktop */}
                                     <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent/20 z-10" />
                                     <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent z-10" />
                                 </div>
@@ -161,8 +167,9 @@ export const Hero = ({ onInterest }: HeroProps) => {
                 </Carousel>
             </div>
 
-            {/* Elementos Flutuantes */}
+            {/* --- ELEMENTOS FLUTUANTES (Apenas Desktop) --- */}
             <div className="absolute inset-y-0 right-0 w-1/2 z-10 pointer-events-none hidden md:block max-w-[700px]">
+                {/* ROI */}
                 <div className="absolute top-[25%] right-[5%] bg-black/40 backdrop-blur-sm border border-[#FABE01]/20 p-3 rounded-lg flex items-center gap-3 animate-float-slow shadow-lg">
                     <div className="bg-[#FABE01]/10 p-2 rounded-md">
                         <TrendingUp className="w-5 h-5 text-[#FABE01]" />
@@ -173,6 +180,7 @@ export const Hero = ({ onInterest }: HeroProps) => {
                     </div>
                 </div>
 
+                {/* Prova Social */}
                 <div className="absolute bottom-[20%] right-[10%] bg-black/40 backdrop-blur-sm border border-white/10 p-3 rounded-lg flex items-center gap-3 animate-float-medium shadow-lg">
                     <div className="bg-white/10 p-2 rounded-full">
                         <Users className="w-4 h-4 text-white" />
@@ -195,6 +203,7 @@ export const Hero = ({ onInterest }: HeroProps) => {
                     </div>
                 </div>
 
+                {/* Selo */}
                 <div className="absolute bottom-[10%] right-[40%] bg-gradient-to-br from-[#FABE01]/50 to-[#DE7928]/50 p-[1px] rounded-full animate-float-fast opacity-80">
                     <div className="bg-black/60 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-2">
                         <ShieldCheck className="w-3 h-3 text-[#FABE01]" />
@@ -203,10 +212,38 @@ export const Hero = ({ onInterest }: HeroProps) => {
                 </div>
             </div>
 
-            {/* Conteúdo de Texto */}
+            {/* --- CONTEÚDO DE TEXTO --- */}
             <div className="container relative z-20 h-full flex flex-col justify-center px-4 md:pl-28 md:pr-12 pt-24 md:pt-32 pointer-events-none">
                 <div className="w-full max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-                    <div key={current} className="animate-in fade-in slide-in-from-bottom-8 duration-1000">
+
+                    {/* Renderização Condicional do Texto */}
+                    {/* Mobile: Sempre mostra os dados do slide[0] */}
+                    <div className="md:hidden pointer-events-auto">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-[#FABE01]/30 rounded-full bg-[#FABE01]/10 backdrop-blur-sm shadow-md">
+                            <Star className="w-3 h-3 text-[#FABE01] fill-[#FABE01]" />
+                            <span className="text-[#FABE01] text-[10px] font-bold uppercase tracking-widest">
+                                {slides[0].tag}
+                            </span>
+                        </div>
+                        <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-[1.1] drop-shadow-lg">
+                            {slides[0].title}
+                        </h1>
+                        <p className="text-base sm:text-lg text-zinc-200 mb-8 leading-relaxed max-w-lg mx-auto font-medium drop-shadow-md">
+                            {slides[0].description}
+                        </p>
+                        <Button
+                            size="lg"
+                            className="w-full bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold px-8 py-6 text-lg rounded-sm transition-all shadow-[0_0_20px_rgba(250,190,1,0.3)]"
+                            asChild
+                        >
+                            <a href="http://wa.me/5513991187759" target="_blank" rel="noopener noreferrer">
+                                Fale com um especialista
+                            </a>
+                        </Button>
+                    </div>
+
+                    {/* Desktop: Mostra dados dinâmicos do slide[current] */}
+                    <div key={current} className="hidden md:block animate-in fade-in slide-in-from-bottom-8 duration-1000 pointer-events-auto">
                         <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-[#FABE01]/30 rounded-full bg-[#FABE01]/10 backdrop-blur-sm shadow-md">
                             <Star className="w-3 h-3 text-[#FABE01] fill-[#FABE01]" />
                             <span className="text-[#FABE01] text-[10px] md:text-xs font-bold uppercase tracking-widest">
@@ -222,15 +259,21 @@ export const Hero = ({ onInterest }: HeroProps) => {
                             {slides[current].description}
                         </p>
 
-                        {/* 3. Botão atualizado para usar a função de clique */}
                         <Button
                             size="lg"
-                            className="w-full md:w-auto bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold px-8 py-6 text-lg rounded-sm transition-all hover:scale-105 shadow-[0_0_20px_rgba(250,190,1,0.3)] hover:shadow-[0_0_30px_rgba(250,190,1,0.5)] pointer-events-auto"
-                            onClick={handleCtaClick}
+                            className="w-full md:w-auto bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold px-8 py-6 text-lg rounded-sm transition-all hover:scale-105 shadow-[0_0_20px_rgba(250,190,1,0.3)] hover:shadow-[0_0_30px_rgba(250,190,1,0.5)]"
+                            asChild
                         >
-                            Fale com um especialista
+                            <a
+                                href="http://wa.me/5513991187759"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Fale com um especialista
+                            </a>
                         </Button>
                     </div>
+
                 </div>
             </div>
         </section>
