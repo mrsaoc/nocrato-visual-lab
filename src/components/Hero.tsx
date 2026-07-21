@@ -133,8 +133,8 @@ export const Hero = () => {
                     />
 
                     {/* Gradiente Escuro no Mobile para garantir leitura do texto */}
-                    <div className="absolute inset-0 bg-black/50 z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent z-10" />
+                    <div className="absolute inset-0 bg-black/30 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/70 via-[#111111]/30 to-transparent z-10" />
                 </div>
             </div>
 
@@ -158,8 +158,8 @@ export const Hero = () => {
                                         className={`absolute inset-0 w-full h-full object-cover ${slide.align}`}
                                     />
                                     {/* Gradientes Desktop */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent/20 z-10" />
-                                    <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#111111] via-[#111111]/80 to-transparent z-10" />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/50 to-transparent/20 z-10" />
+                                    <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#111111]/70 via-[#111111]/40 to-transparent z-10" />
                                 </div>
                             </CarouselItem>
                         ))}
