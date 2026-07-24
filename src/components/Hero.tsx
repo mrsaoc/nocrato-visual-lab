@@ -10,7 +10,8 @@ import Autoplay from "embla-carousel-autoplay";
 import { TrendingUp, Users, ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Imagens
-import bricio1 from "@/assets/bricioepedro.png";
+import textureImg from "@/assets/image-removebg-preview.png";
+import logoImg from "@/assets/logo.png";
 import bricio2 from "@/assets/bricio2.jpeg";
 import pedro1 from "@/assets/pedro1.jpeg";
 import pedro2 from "@/assets/pedro2.jpeg";
@@ -18,14 +19,15 @@ import pedro2 from "@/assets/pedro2.jpeg";
 export const Hero = () => {
     const [api, setApi] = useState<CarouselApi>();
     const [current, setCurrent] = useState(0);
-
     const plugin = useRef(
         Autoplay({ delay: 8000, stopOnInteraction: false })
     );
 
     const slides = [
         {
-            image: bricio1,
+            isTexture: true,
+            image: textureImg,
+            hasLogo: true,
             align: "object-[center_35%]",
             tag: "Marketing de Raiz Forte",
             title: (
@@ -39,7 +41,9 @@ export const Hero = () => {
             description: "Para aumentar seu engajamento e número de vendas com a resiliência de quem conhece o terreno."
         },
         {
+            isTexture: false,
             image: pedro1,
+            hasLogo: false,
             align: "object-[center_35%]",
             tag: "Alta Performance",
             title: (
@@ -53,7 +57,9 @@ export const Hero = () => {
             description: "Campanhas de tráfego pago otimizadas para atrair o público particular qualificado que sua clínica merece."
         },
         {
+            isTexture: false,
             image: bricio2,
+            hasLogo: false,
             align: "object-[center_35%]",
             tag: "Autoridade Médica",
             title: (
@@ -67,7 +73,9 @@ export const Hero = () => {
             description: "Posicionamento estratégico e ético para médicos que desejam ser a referência número 1 na sua especialidade."
         },
         {
+            isTexture: false,
             image: pedro2,
+            hasLogo: false,
             align: "object-[center_35%]",
             tag: "Tecnologia Exclusiva",
             title: (
@@ -90,6 +98,7 @@ export const Hero = () => {
 
     useEffect(() => {
         if (!api) return;
+
         api.on("select", () => {
             setCurrent(api.selectedScrollSnap());
         });
@@ -97,7 +106,6 @@ export const Hero = () => {
 
     return (
         <section id="hero" className="relative h-[100dvh] flex items-center overflow-hidden bg-[#111111] group/hero">
-
             {/* --- CONTROLES MANUAIS (Apenas Desktop) --- */}
             <div className="hidden md:block">
                 <button
@@ -108,7 +116,6 @@ export const Hero = () => {
                 >
                     <ChevronLeft className="w-8 h-8" />
                 </button>
-
                 <button
                     onClick={() => api?.scrollNext()}
                     className="absolute right-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/40 text-white/50 backdrop-blur-md transition-all
@@ -123,18 +130,39 @@ export const Hero = () => {
                 VERSÃO MOBILE: APENAS 1 IMAGEM ESTÁTICA COM AJUSTE DE FOCO
                ========================================================= */}
             <div className="md:hidden absolute inset-0 z-0">
-                <div className="relative w-full h-full">
-                    <img
-                        src={slides[0].image}
-                        alt="Hero Mobile"
-                        // MUDANÇA AQUI: object-[80%_center]
-                        // Movendo mais para a "esquerda" visualmente (mostrando mais o lado direito da foto original)
-                        className="absolute inset-0 w-full h-full object-cover object-[80%_center]"
-                    />
+                <div className="relative w-full h-full bg-[#111111]">
+                    {/* Renderiza a Textura ou Imagem Normal */}
+                    {slides[0].isTexture ? (
+                        <div
+                            className="absolute inset-0 w-full h-full opacity-60"
+                            style={{
+                                backgroundImage: `url(${slides[0].image})`,
+                                backgroundRepeat: 'repeat',
+                                backgroundSize: '180px'
+                            }}
+                        />
+                    ) : (
+                        <img
+                            src={slides[0].image}
+                            alt="Hero Mobile"
+                            className="absolute inset-0 w-full h-full object-cover object-[80%_center]"
+                        />
+                    )}
+                    
+                    {/* Gradientes Escuros no Mobile */}
+                    <div className="absolute inset-0 bg-[#111111]/70 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/60 to-transparent z-10" />
 
-                    {/* Gradiente Escuro no Mobile para garantir leitura do texto */}
-                    <div className="absolute inset-0 bg-black/30 z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/70 via-[#111111]/30 to-transparent z-10" />
+                    {/* Logo posicionada perfeitamente no centro no Mobile */}
+                    {slides[0].hasLogo && (
+                        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                            <img
+                                src={logoImg}
+                                alt="Logo"
+                                className="w-3/4 max-w-[280px] object-contain invert opacity-100 drop-shadow-2xl"
+                            />
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -151,15 +179,39 @@ export const Hero = () => {
                     <CarouselContent className="-ml-0 h-full">
                         {slides.map((slide, index) => (
                             <CarouselItem key={index} className="pl-0 h-full w-full">
-                                <div className="relative w-full h-full">
-                                    <img
-                                        src={slide.image}
-                                        alt={`Slide ${index + 1}`}
-                                        className={`absolute inset-0 w-full h-full object-cover ${slide.align}`}
-                                    />
+                                <div className="relative w-full h-full bg-[#111111]">
+                                    {/* Renderiza a Textura ou Imagem Normal */}
+                                    {slide.isTexture ? (
+                                        <div
+                                            className="absolute inset-0 w-full h-full opacity-60"
+                                            style={{
+                                                backgroundImage: `url(${slide.image})`,
+                                                backgroundRepeat: 'repeat',
+                                                backgroundSize: '180px'
+                                            }}
+                                        />
+                                    ) : (
+                                        <img
+                                            src={slide.image}
+                                            alt={`Slide ${index + 1}`}
+                                            className={`absolute inset-0 w-full h-full object-cover ${slide.align}`}
+                                        />
+                                    )}
+
                                     {/* Gradientes Desktop */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/50 to-transparent/20 z-10" />
-                                    <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#111111]/70 via-[#111111]/40 to-transparent z-10" />
+                                    <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/95 via-[#111111]/60 to-transparent z-10" />
+                                    <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent z-10" />
+
+                                    {/* Logo destacada no centro, acima dos gradientes */}
+                                    {slide.hasLogo && (
+                                        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                                            <img
+                                                src={logoImg}
+                                                alt="Logo"
+                                                className="w-full max-w-[450px] object-contain invert opacity-100 drop-shadow-2xl"
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             </CarouselItem>
                         ))}
@@ -168,7 +220,7 @@ export const Hero = () => {
             </div>
 
             {/* --- ELEMENTOS FLUTUANTES (Apenas Desktop) --- */}
-            <div className="absolute inset-y-0 right-0 w-1/2 z-10 pointer-events-none hidden md:block max-w-[700px]">
+            <div className="absolute inset-y-0 right-0 w-1/2 z-20 pointer-events-none hidden md:block max-w-[700px]">
                 {/* ROI */}
                 <div className="absolute top-[25%] right-[5%] bg-black/40 backdrop-blur-sm border border-[#FABE01]/20 p-3 rounded-lg flex items-center gap-3 animate-float-slow shadow-lg">
                     <div className="bg-[#FABE01]/10 p-2 rounded-md">
@@ -213,10 +265,9 @@ export const Hero = () => {
             </div>
 
             {/* --- CONTEÚDO DE TEXTO --- */}
-            <div className="container relative z-20 h-full flex flex-col justify-center px-4 md:pl-28 md:pr-12 pt-24 md:pt-32 pointer-events-none">
+            <div className="container relative z-30 h-full flex flex-col justify-center px-4 md:pl-28 md:pr-12 pt-24 md:pt-32 pointer-events-none">
                 <div className="w-full max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-
-                    {/* Renderização Condicional do Texto */}
+                    {/* Renderiza o Condicional do Texto */}
                     {/* Mobile: Sempre mostra os dados do slide[0] */}
                     <div className="md:hidden pointer-events-auto">
                         <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-[#FABE01]/30 rounded-full bg-[#FABE01]/10 backdrop-blur-sm shadow-md">
@@ -225,12 +276,15 @@ export const Hero = () => {
                                 {slides[0].tag}
                             </span>
                         </div>
+
                         <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-[1.1] drop-shadow-lg">
                             {slides[0].title}
                         </h1>
+
                         <p className="text-base sm:text-lg text-zinc-200 mb-8 leading-relaxed max-w-lg mx-auto font-medium drop-shadow-md">
                             {slides[0].description}
                         </p>
+
                         <Button
                             size="lg"
                             className="w-full bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold px-8 py-6 text-lg rounded-sm transition-all shadow-[0_0_20px_rgba(250,190,1,0.3)]"
@@ -273,7 +327,6 @@ export const Hero = () => {
                             </a>
                         </Button>
                     </div>
-
                 </div>
             </div>
         </section>

@@ -12,16 +12,16 @@ export const Testimonials = () => {
     const imageTestimonials = [
         {
             name: "DR MARCIO",
-            role: "MÉDICO DO ESPORTE",
+            role: "FISIOTERAPEUTA",
             subtitle: "Agenda lotada por 2 meses",
-            text: "Ele lotou a agenda por 2 meses, ganhou mais de 15 mil seguidores em apenas 30 dias e ainda alcançou conteúdos com mais de 1,2 milhão de visualizações.",
+            text: "Ele lotou a agenda por 2 meses, ganhou mais de 25 mil seguidores em apenas 30 dias e ainda alcançou conteúdos com mais de 1,2 milhão de visualizações.",
             image: drMarcioImg,
         },
         {
             name: "DRA FABIANA",
-            role: "DERMATOLOGISTA",
+            role: "FISIOTERAPEUTA",
             subtitle: "Referência em Injetáveis",
-            text: "Cresceu mais de 30 mil seguidores, está na 15ª mentoria e se tornou a maior referência da região quando o assunto é injetáveis para dor e estética.",
+            text: "Cresceu mais de 250 mil seguidores, está na 15ª mentoria e se tornou a maior referência da região quando o assunto é injetáveis para dor e estética.",
             image: draFabianaImg,
         },
     ];
