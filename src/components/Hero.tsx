@@ -1,222 +1,50 @@
-import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    type CarouselApi,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-import { TrendingUp, Users, ShieldCheck, Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { TrendingUp, Users, ShieldCheck, Star } from "lucide-react";
 
 // Imagens
 import textureImg from "@/assets/image-removebg-preview.png";
 import logoImg from "@/assets/logo.png";
-import bricio2 from "@/assets/bricio2.jpeg";
-import pedro1 from "@/assets/pedro1.jpeg";
-import pedro2 from "@/assets/pedro2.jpeg";
 
-export const Hero = () => {
-    const [api, setApi] = useState<CarouselApi>();
-    const [current, setCurrent] = useState(0);
-    const plugin = useRef(
-        Autoplay({ delay: 8000, stopOnInteraction: false })
-    );
+interface HeroProps {
+    onInterest?: (interest: string) => void;
+}
 
-    const slides = [
-        {
-            isTexture: true,
-            image: textureImg,
-            hasLogo: true,
-            align: "object-[center_35%]",
-            tag: "Marketing de Raiz Forte",
-            title: (
-                <>
-                    A equipe de marketing{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FABE01] to-[#DE7928]">
-            certa
-          </span>
-                </>
-            ),
-            description: "Para aumentar seu engajamento e número de vendas com a resiliência de quem conhece o terreno."
-        },
-        {
-            isTexture: false,
-            image: pedro1,
-            hasLogo: false,
-            align: "object-[center_35%]",
-            tag: "Alta Performance",
-            title: (
-                <>
-                    Tenha sua agenda{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FABE01] to-[#DE7928]">
-            lotada
-          </span>
-                </>
-            ),
-            description: "Campanhas de tráfego pago otimizadas para atrair o público particular qualificado que sua clínica merece."
-        },
-        {
-            isTexture: false,
-            image: bricio2,
-            hasLogo: false,
-            align: "object-[center_35%]",
-            tag: "Autoridade Médica",
-            title: (
-                <>
-                    Transforme seguidores em{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FABE01] to-[#DE7928]">
-            pacientes
-          </span>
-                </>
-            ),
-            description: "Posicionamento estratégico e ético para médicos que desejam ser a referência número 1 na sua especialidade."
-        },
-        {
-            isTexture: false,
-            image: pedro2,
-            hasLogo: false,
-            align: "object-[center_35%]",
-            tag: "Tecnologia Exclusiva",
-            title: (
-                <>
-                    Sua clínica na vanguarda da{" "}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FABE01] to-[#DE7928]">
-            inovação
-          </span>
-                </>
-            ),
-            description: "Sites de alta conversão e sistemas inteligentes que trabalham para você 24 horas por dia."
-        }
-    ];
-
+export const Hero = ({ onInterest }: HeroProps) => {
     const avatarImages = [
         "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&fit=crop&crop=faces",
         "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=64&h=64&fit=crop&crop=faces",
         "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=64&h=64&fit=crop&crop=faces",
     ];
 
-    useEffect(() => {
-        if (!api) return;
-
-        api.on("select", () => {
-            setCurrent(api.selectedScrollSnap());
-        });
-    }, [api]);
-
     return (
         <section id="hero" className="relative h-[100dvh] flex items-center overflow-hidden bg-[#111111] group/hero">
-            {/* --- CONTROLES MANUAIS (Apenas Desktop) --- */}
-            <div className="hidden md:block">
-                <button
-                    onClick={() => api?.scrollPrev()}
-                    className="absolute left-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/40 text-white/50 backdrop-blur-md transition-all
-            hover:bg-black/80 hover:text-[#FABE01] hover:border-[#FABE01]/50
-            opacity-0 group-hover/hero:opacity-100 duration-500 cursor-pointer pointer-events-auto"
-                >
-                    <ChevronLeft className="w-8 h-8" />
-                </button>
-                <button
-                    onClick={() => api?.scrollNext()}
-                    className="absolute right-8 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full border border-white/10 bg-black/40 text-white/50 backdrop-blur-md transition-all
-            hover:bg-black/80 hover:text-[#FABE01] hover:border-[#FABE01]/50
-            opacity-0 group-hover/hero:opacity-100 duration-500 cursor-pointer pointer-events-auto"
-                >
-                    <ChevronRight className="w-8 h-8" />
-                </button>
-            </div>
-
-            {/* =========================================================
-                VERSÃO MOBILE: APENAS 1 IMAGEM ESTÁTICA COM AJUSTE DE FOCO
-               ========================================================= */}
-            <div className="md:hidden absolute inset-0 z-0">
+            
+            {/* BACKGROUND ESTÁTICO */}
+            <div className="absolute inset-0 z-0">
                 <div className="relative w-full h-full bg-[#111111]">
-                    {/* Renderiza a Textura ou Imagem Normal */}
-                    {slides[0].isTexture ? (
-                        <div
-                            className="absolute inset-0 w-full h-full opacity-60"
-                            style={{
-                                backgroundImage: `url(${slides[0].image})`,
-                                backgroundRepeat: 'repeat',
-                                backgroundSize: '180px'
-                            }}
-                        />
-                    ) : (
+                    {/* Textura */}
+                    <div
+                        className="absolute inset-0 w-full h-full opacity-60"
+                        style={{
+                            backgroundImage: `url(${textureImg})`,
+                            backgroundRepeat: 'repeat',
+                            backgroundSize: '180px'
+                        }}
+                    />
+
+                    {/* Gradientes */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/95 via-[#111111]/60 to-transparent z-10" />
+                    <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent z-10" />
+
+                    {/* Logo - Deslocada para a direita para não sobrepor o texto */}
+                    <div className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-16 lg:pr-32 z-20 pointer-events-none">
                         <img
-                            src={slides[0].image}
-                            alt="Hero Mobile"
-                            className="absolute inset-0 w-full h-full object-cover object-[80%_center]"
+                            src={logoImg}
+                            alt="Logo"
+                            className="w-3/4 md:w-full max-w-[280px] md:max-w-[450px] object-contain invert opacity-100 drop-shadow-2xl translate-x-0 md:translate-x-16"
                         />
-                    )}
-                    
-                    {/* Gradientes Escuros no Mobile */}
-                    <div className="absolute inset-0 bg-[#111111]/70 z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/60 to-transparent z-10" />
-
-                    {/* Logo posicionada perfeitamente no centro no Mobile */}
-                    {slides[0].hasLogo && (
-                        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                            <img
-                                src={logoImg}
-                                alt="Logo"
-                                className="w-3/4 max-w-[280px] object-contain invert opacity-100 drop-shadow-2xl"
-                            />
-                        </div>
-                    )}
+                    </div>
                 </div>
-            </div>
-
-            {/* =========================================================
-                VERSÃO DESKTOP: CARROSSEL COMPLETO
-               ========================================================= */}
-            <div className="hidden md:block absolute inset-0 z-0 cursor-grab active:cursor-grabbing">
-                <Carousel
-                    setApi={setApi}
-                    plugins={[plugin.current]}
-                    className="w-full h-full [&>div]:h-full"
-                    opts={{ loop: true, align: "start" }}
-                >
-                    <CarouselContent className="-ml-0 h-full">
-                        {slides.map((slide, index) => (
-                            <CarouselItem key={index} className="pl-0 h-full w-full">
-                                <div className="relative w-full h-full bg-[#111111]">
-                                    {/* Renderiza a Textura ou Imagem Normal */}
-                                    {slide.isTexture ? (
-                                        <div
-                                            className="absolute inset-0 w-full h-full opacity-60"
-                                            style={{
-                                                backgroundImage: `url(${slide.image})`,
-                                                backgroundRepeat: 'repeat',
-                                                backgroundSize: '180px'
-                                            }}
-                                        />
-                                    ) : (
-                                        <img
-                                            src={slide.image}
-                                            alt={`Slide ${index + 1}`}
-                                            className={`absolute inset-0 w-full h-full object-cover ${slide.align}`}
-                                        />
-                                    )}
-
-                                    {/* Gradientes Desktop */}
-                                    <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/95 via-[#111111]/60 to-transparent z-10" />
-                                    <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent z-10" />
-
-                                    {/* Logo destacada no centro, acima dos gradientes */}
-                                    {slide.hasLogo && (
-                                        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                                            <img
-                                                src={logoImg}
-                                                alt="Logo"
-                                                className="w-full max-w-[450px] object-contain invert opacity-100 drop-shadow-2xl"
-                                            />
-                                        </div>
-                                    )}
-                                </div>
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                </Carousel>
             </div>
 
             {/* --- ELEMENTOS FLUTUANTES (Apenas Desktop) --- */}
@@ -266,67 +94,36 @@ export const Hero = () => {
 
             {/* --- CONTEÚDO DE TEXTO --- */}
             <div className="container relative z-30 h-full flex flex-col justify-center px-4 md:pl-28 md:pr-12 pt-24 md:pt-32 pointer-events-none">
-                <div className="w-full max-w-2xl mx-auto md:mx-0 text-center md:text-left">
-                    {/* Renderiza o Condicional do Texto */}
-                    {/* Mobile: Sempre mostra os dados do slide[0] */}
-                    <div className="md:hidden pointer-events-auto">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-[#FABE01]/30 rounded-full bg-[#FABE01]/10 backdrop-blur-sm shadow-md">
-                            <Star className="w-3 h-3 text-[#FABE01] fill-[#FABE01]" />
-                            <span className="text-[#FABE01] text-[10px] font-bold uppercase tracking-widest">
-                                {slides[0].tag}
-                            </span>
-                        </div>
-
-                        <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-[1.1] drop-shadow-lg">
-                            {slides[0].title}
-                        </h1>
-
-                        <p className="text-base sm:text-lg text-zinc-200 mb-8 leading-relaxed max-w-lg mx-auto font-medium drop-shadow-md">
-                            {slides[0].description}
-                        </p>
-
-                        <Button
-                            size="lg"
-                            className="w-full bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold px-8 py-6 text-lg rounded-sm transition-all shadow-[0_0_20px_rgba(250,190,1,0.3)]"
-                            asChild
-                        >
-                            <a href="http://wa.me/5513991187759" target="_blank" rel="noopener noreferrer">
-                                Fale com um especialista
-                            </a>
-                        </Button>
+                <div className="w-full max-w-2xl mx-auto md:mx-0 text-center md:text-left pointer-events-auto animate-in fade-in slide-in-from-bottom-8 duration-1000">
+                    
+                    <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-[#FABE01]/30 rounded-full bg-[#FABE01]/10 backdrop-blur-sm shadow-md">
+                        <Star className="w-3 h-3 text-[#FABE01] fill-[#FABE01]" />
+                        <span className="text-[#FABE01] text-[10px] md:text-xs font-bold uppercase tracking-widest">
+                            Marketing de Raiz Forte
+                        </span>
                     </div>
-
-                    {/* Desktop: Mostra dados dinâmicos do slide[current] */}
-                    <div key={current} className="hidden md:block animate-in fade-in slide-in-from-bottom-8 duration-1000 pointer-events-auto">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-[#FABE01]/30 rounded-full bg-[#FABE01]/10 backdrop-blur-sm shadow-md">
-                            <Star className="w-3 h-3 text-[#FABE01] fill-[#FABE01]" />
-                            <span className="text-[#FABE01] text-[10px] md:text-xs font-bold uppercase tracking-widest">
-                                {slides[current].tag}
-                            </span>
-                        </div>
-
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] drop-shadow-lg">
-                            {slides[current].title}
-                        </h1>
-
-                        <p className="text-base sm:text-lg md:text-xl text-zinc-200 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0 font-medium drop-shadow-md min-h-[5rem] md:min-h-[4rem] flex items-start md:justify-start justify-center">
-                            {slides[current].description}
-                        </p>
-
-                        <Button
-                            size="lg"
-                            className="w-full md:w-auto bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold px-8 py-6 text-lg rounded-sm transition-all hover:scale-105 shadow-[0_0_20px_rgba(250,190,1,0.3)] hover:shadow-[0_0_30px_rgba(250,190,1,0.5)]"
-                            asChild
+                    
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] drop-shadow-lg">
+                        A equipe de marketing <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FABE01] to-[#DE7928]">certa</span>
+                    </h1>
+                    
+                    <p className="text-base sm:text-lg md:text-xl text-zinc-200 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0 font-medium drop-shadow-md min-h-[5rem] md:min-h-[4rem] flex items-start md:justify-start justify-center">
+                        Para aumentar seu engajamento e número de vendas com a resiliência de quem conhece o terreno.
+                    </p>
+                    
+                    <Button
+                        size="lg"
+                        className="w-full md:w-auto bg-[#FABE01] hover:bg-[#FABE01]/90 text-[#111111] font-bold px-8 py-6 text-lg rounded-sm transition-all hover:scale-105 shadow-[0_0_20px_rgba(250,190,1,0.3)] hover:shadow-[0_0_30px_rgba(250,190,1,0.5)]"
+                        asChild
+                    >
+                        <a
+                            href="http://wa.me/5513991187759"
+                            target="_blank"
+                            rel="noopener noreferrer"
                         >
-                            <a
-                                href="http://wa.me/5513991187759"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Fale com um especialista
-                            </a>
-                        </Button>
-                    </div>
+                            Fale com um especialista
+                        </a>
+                    </Button>
                 </div>
             </div>
         </section>

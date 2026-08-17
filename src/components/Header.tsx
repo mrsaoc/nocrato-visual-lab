@@ -2,20 +2,19 @@ import { useState, useEffect } from "react";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { Progress } from "@/components/ui/progress"; // Se tiver componente, ou div simples
+import { Progress } from "@/components/ui/progress";
 
 export const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("");
-    const [scrollProgress, setScrollProgress] = useState(0); // Estado para a barra de progresso (Mudança 3)
+    const [scrollProgress, setScrollProgress] = useState(0);
 
     const navLinks = [
         { name: "Início", href: "#hero", id: "hero" },
         { name: "Método PAEV", href: "#method", id: "method" },
         { name: "Serviços", href: "#services", id: "services" },
         { name: "Depoimentos", href: "#testimonials", id: "testimonials" },
-        { name: "Quem Somos", href: "#team", id: "team" },
     ];
 
     useEffect(() => {
@@ -36,7 +35,7 @@ export const Header = () => {
                 }
             }
 
-            // Lógica da Barra de Progresso (Mudança 3)
+            // Lógica da Barra de Progresso
             const totalScroll = document.documentElement.scrollTop;
             const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scroll = `${totalScroll / windowHeight}`;
@@ -59,7 +58,6 @@ export const Header = () => {
             <div className="absolute bottom-0 left-0 h-[2px] bg-[#FABE01] transition-all duration-100 ease-out z-50" style={{ width: `${scrollProgress}%` }} />
 
             <div className="container px-4 flex justify-between items-center">
-
                 {/* LOGO */}
                 <a href="#hero" className="relative z-50">
                     <img
@@ -89,7 +87,6 @@ export const Header = () => {
                             />
                         </a>
                     ))}
-
                     <Button
                         asChild
                         className="bg-[#FABE01] hover:bg-[#FABE01]/90 text-black font-bold rounded-full px-6 shadow-[0_0_15px_rgba(250,190,1,0.3)] hover:shadow-[0_0_25px_rgba(250,190,1,0.5)] transition-all"
@@ -110,7 +107,7 @@ export const Header = () => {
                     )}
                 </button>
 
-                {/* MENU MOBILE Melhorado (Backdrop Blur e transparência) (Mudança 3) */}
+                {/* MENU MOBILE */}
                 <div
                     className={`fixed inset-0 bg-[#111111]/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 transition-all duration-300 ${
                         isMobileMenuOpen
@@ -119,7 +116,6 @@ export const Header = () => {
                     }`}
                 >
                     <div className="absolute top-[-20%] right-[-10%] w-[300px] h-[300px] bg-[#FABE01]/10 rounded-full blur-[100px] pointer-events-none" />
-
                     <nav className="flex flex-col items-center gap-8 relative z-10">
                         {navLinks.map((link) => (
                             <a
@@ -133,7 +129,6 @@ export const Header = () => {
                                 {link.name}
                             </a>
                         ))}
-
                         <Button
                             asChild
                             size="lg"
@@ -145,8 +140,7 @@ export const Header = () => {
                         </Button>
                     </nav>
                 </div>
-
             </div>
         </header>
     );
-};
+}; 

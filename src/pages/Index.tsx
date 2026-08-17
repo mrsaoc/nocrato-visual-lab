@@ -6,7 +6,6 @@ import { Method } from "@/components/Method";
 import { Services } from "@/components/Services";
 import { TargetAudience } from "@/components/TargetAudience";
 import { Testimonials } from "@/components/Testimonials";
-import { Team } from "@/components/Team";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
@@ -30,30 +29,25 @@ const Index = () => {
     return (
         <div className="min-h-screen bg-[#111111] text-white">
             <Header />
-
             <main>
                 {/* O Hero agora passa o slide atual como interesse */}
                 <Hero onInterest={handleInterest} />
-
+                
                 {/* Ticker geralmente tem botões ou logos, se tiver CTA, passe a prop */}
                 <Ticker />
-
+                
                 {/* Método PAEV: Botão "Quero conhecer o método" ativa isso */}
                 <Method onInterest={() => handleInterest("Método PAEV")} />
-
+                
                 {/* Serviços: Cada card passa seu próprio título */}
                 <Services onSelectService={handleInterest} />
-
+                
                 <TargetAudience />
-
                 <Testimonials />
-
-                <Team />
-
+                
                 {/* O formulário recebe o interesse final para exibir e enviar */}
                 <Contact interestedService={interestedService} />
             </main>
-
             <Footer />
             <BackToTop />
         </div>

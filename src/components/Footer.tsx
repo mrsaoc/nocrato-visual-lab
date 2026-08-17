@@ -6,13 +6,12 @@ export const Footer = () => {
 
   return (
       <footer className="bg-[#0a0a0a] text-white pt-20 pb-10 border-t border-white/5 relative overflow-hidden">
-
         {/* Efeito de brilho no fundo */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#FABE01]/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="container px-4 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-
+            
             {/* Coluna 1: Sobre */}
             <div className="space-y-6">
               <img
@@ -36,7 +35,7 @@ export const Footer = () => {
               </div>
             </div>
 
-            {/* Coluna 2: Navegação (IDs CORRIGIDOS) */}
+            {/* Coluna 2: Navegação */}
             <div>
               <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#FABE01]" />
@@ -62,12 +61,6 @@ export const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#team" className="text-zinc-400 hover:text-[#FABE01] text-sm flex items-center gap-2 transition-colors group">
-                    <ArrowRight className="w-3 h-3 text-[#FABE01] opacity-0 group-hover:opacity-100 transition-opacity" />
-                    Quem Somos
-                  </a>
-                </li>
-                <li>
                   <a href="#testimonials" className="text-zinc-400 hover:text-[#FABE01] text-sm flex items-center gap-2 transition-colors group">
                     <ArrowRight className="w-3 h-3 text-[#FABE01] opacity-0 group-hover:opacity-100 transition-opacity" />
                     Depoimentos
@@ -76,7 +69,7 @@ export const Footer = () => {
               </ul>
             </div>
 
-            {/* Coluna 3: Serviços (Apenas Lista Visual) */}
+            {/* Coluna 3: Serviços */}
             <div>
               <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#FABE01]" />
