@@ -36,12 +36,12 @@ export const Hero = ({ onInterest }: HeroProps) => {
                     <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/95 via-[#111111]/60 to-transparent z-10" />
                     <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-[#111111] via-[#111111]/40 to-transparent z-10" />
 
-                    {/* Logo - Deslocada para a direita para não sobrepor o texto */}
+                    {/* Logo - Deslocada para a direita no desktop e com opacidade reduzida no mobile */}
                     <div className="absolute inset-0 flex items-center justify-center md:justify-end md:pr-16 lg:pr-32 z-20 pointer-events-none">
                         <img
                             src={logoImg}
                             alt="Logo"
-                            className="w-3/4 md:w-full max-w-[280px] md:max-w-[450px] object-contain invert opacity-100 drop-shadow-2xl translate-x-0 md:translate-x-16"
+                            className="w-3/4 md:w-full max-w-[280px] md:max-w-[450px] object-contain invert opacity-15 md:opacity-100 drop-shadow-2xl translate-x-0 md:translate-x-16 transition-opacity duration-300"
                         />
                     </div>
                 </div>
